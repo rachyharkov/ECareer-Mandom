@@ -45,7 +45,6 @@
             <tr>
                 <th>No</th>
         <th>Nama Dept</th>
-        <th>Id Posisi</th>
         <th>Action</th>
             </tr><?php
             foreach ($dept_data as $dept)
@@ -54,7 +53,6 @@
                 <tr>
             <td width="80px"><?php echo ++$start ?></td>
             <td><?php echo $dept->nama_dept ?></td>
-            <td><?php echo $dept->id_posisi ?></td>
             <td style="text-align:center" width="200px">
                 <?php 
                 echo anchor(site_url('dept/read/'.$dept->id_dept),'Read'); 

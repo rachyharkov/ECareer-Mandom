@@ -50,7 +50,6 @@ class Dept extends CI_Controller
             $data = array(
 		'id_dept' => $row->id_dept,
 		'nama_dept' => $row->nama_dept,
-		'id_posisi' => $row->id_posisi,
 	    );
             $this->template->load('template','dept/tbl_dept_read', $data);
         } else {
@@ -65,8 +64,7 @@ class Dept extends CI_Controller
             'button' => 'Create',
             'action' => site_url('dept/create_action'),
 	    'id_dept' => set_value('id_dept'),
-	    'nama_dept' => set_value('nama_dept'),
-	    'id_posisi' => set_value('id_posisi'),
+	    'nama_dept' => set_value('nama_dept')
 	);
         $this->template->load('template','dept/tbl_dept_form', $data);
     }
@@ -79,10 +77,9 @@ class Dept extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama_dept' => $this->input->post('nama_dept',TRUE),
-		'id_posisi' => $this->input->post('id_posisi',TRUE),
+		      'nama_dept' => $this->input->post('nama_dept',TRUE),
 	    );
-
+            
             $this->Dept_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('dept'));
@@ -99,7 +96,6 @@ class Dept extends CI_Controller
                 'action' => site_url('dept/update_action'),
 		'id_dept' => set_value('id_dept', $row->id_dept),
 		'nama_dept' => set_value('nama_dept', $row->nama_dept),
-		'id_posisi' => set_value('id_posisi', $row->id_posisi),
 	    );
             $this->template->load('template','dept/tbl_dept_form', $data);
         } else {
@@ -117,7 +113,6 @@ class Dept extends CI_Controller
         } else {
             $data = array(
 		'nama_dept' => $this->input->post('nama_dept',TRUE),
-		'id_posisi' => $this->input->post('id_posisi',TRUE),
 	    );
 
             $this->Dept_model->update($this->input->post('id_dept', TRUE), $data);
@@ -143,7 +138,6 @@ class Dept extends CI_Controller
     public function _rules() 
     {
 	$this->form_validation->set_rules('nama_dept', 'nama dept', 'trim|required');
-	$this->form_validation->set_rules('id_posisi', 'id posisi', 'trim|required');
 
 	$this->form_validation->set_rules('id_dept', 'id_dept', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
@@ -180,7 +174,6 @@ class Dept extends CI_Controller
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_dept);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_posisi);
 
 	    $tablebody++;
             $nourut++;

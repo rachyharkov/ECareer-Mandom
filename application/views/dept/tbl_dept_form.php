@@ -17,10 +17,6 @@
                                 <label for="varchar">Nama Dept <?php echo form_error('nama_dept') ?></label>
                                 <input type="text" class="form-control" name="nama_dept" id="nama_dept" placeholder="Nama Dept" value="<?php echo $nama_dept; ?>" />
                             </div>
-                            <div class="form-group">
-                                <label for="int">Id Posisi <?php echo form_error('id_posisi') ?></label>
-                                <input type="text" class="form-control" name="id_posisi" id="id_posisi" placeholder="Id Posisi" value="<?php echo $id_posisi; ?>" />
-                            </div>
                             <input type="hidden" name="id_dept" value="<?php echo $id_dept; ?>" /> 
                             <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
                             <a href="<?php echo site_url('dept') ?>" class="btn btn-default">Cancel</a>

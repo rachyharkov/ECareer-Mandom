@@ -21,7 +21,6 @@
             <tr>
                 <th>No</th>
 		<th>Nama Dept</th>
-		<th>Id Posisi</th>
 		
             </tr><?php
             foreach ($dept_data as $dept)
@@ -29,8 +28,7 @@
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $dept->nama_dept ?></td>
-		      <td><?php echo $dept->id_posisi ?></td>	
+		      <td><?php echo $dept->nama_dept ?></td>	
                 </tr>
                 <?php
             }

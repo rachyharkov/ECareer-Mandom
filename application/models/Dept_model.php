@@ -33,7 +33,6 @@ class Dept_model extends CI_Model
     function total_rows($q = NULL) {
         $this->db->like('id_dept', $q);
 	$this->db->or_like('nama_dept', $q);
-	$this->db->or_like('id_posisi', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -43,7 +42,6 @@ class Dept_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_dept', $q);
 	$this->db->or_like('nama_dept', $q);
-	$this->db->or_like('id_posisi', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

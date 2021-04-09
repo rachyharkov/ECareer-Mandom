@@ -13,7 +13,6 @@
         <h2 style="margin-top:0px">Tbl_dept Read</h2>
         <table class="table">
 	    <tr><td>Nama Dept</td><td><?php echo $nama_dept; ?></td></tr>
-	    <tr><td>Id Posisi</td><td><?php echo $id_posisi; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('dept') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>

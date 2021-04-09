@@ -71,8 +71,18 @@
             <li class="menu-group">Main</li>
             <li><a href="<?= base_url() ?>dashboard"><i class="ti-home"></i> <span class="title">Dashboard</span></a></li>
             <li class="panel">
-              <a href="#forms" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
-              <div id="forms" class="collapse ">
+              <a href="#pengajuan" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-clipboard"></i> <span class="title">E-Career Manage</span> <i class="icon-submenu ti-angle-left"></i></a>
+              <div id="pengajuan" class="collapse ">
+                <ul class="submenu">
+                  <li><a href="<?= base_url() ?>tambah_pengajauan">Tambah Pengajuan</a></li>
+                  <li><a href="<?= base_url() ?>pengajuan_karyawan">Cek Status Pengajuan</a></li>
+                  <li><a href="<?= base_url() ?>pengajuan_list">Kelola Lowongan</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="panel">
+              <a href="#pengaturan" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
+              <div id="pengaturan" class="collapse">
                 <ul class="submenu">
                   <li><a href="<?= base_url() ?>user">Kelola User</a></li>
                   <li><a href="<?= base_url() ?>user_role">Kelola Level</a></li>
