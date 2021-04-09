@@ -57,6 +57,12 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label for="departemen" class="col-sm-2 control-label">Departemen*</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="departemen" placeholder="departemen" readonly="" value="<?=$this->fungsi->user_login()->nama_depart?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Name*</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="inputName" placeholder="Name" required="" name="name" value="<?=$this->fungsi->user_login()->name?>">

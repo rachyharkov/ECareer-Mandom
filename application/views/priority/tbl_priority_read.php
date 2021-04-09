@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">Tbl_priority Read</h2>
+        <h2 style="margin-top:0px">DETAIL PRIORITAS</h2>
         <table class="table">
 	    <tr><td>Prioritas</td><td><?php echo $prioritas; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('priority') ?>" class="btn btn-default">Cancel</a></td></tr>

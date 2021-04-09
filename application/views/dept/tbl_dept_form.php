@@ -6,7 +6,7 @@
                 <div class="box box-warning box-solid">
     
                     <div class="box-header">
-                        <h3 class="box-title">Tambah Departement</h3>
+                        <h3 class="box-title">FORM DEPARTEMENT</h3>
                     </div>
         
         <div class="box-body">

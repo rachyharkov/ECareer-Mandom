@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">Tbl_posisi Read</h2>
+        <h2 style="margin-top:0px">DETAIL POSISI</h2>
         <table class="table">
 	    <tr><td>Nama Posisi</td><td><?php echo $nama_posisi; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('posisi') ?>" class="btn btn-default">Cancel</a></td></tr>

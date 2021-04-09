@@ -35,6 +35,7 @@
                   <th>Name</th>
                   <th>Address</th>
                   <th>Level</th>
+                  <th>Departemen</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -47,6 +48,7 @@
                     <td><?=$value->name?></td>
                     <td><?=$value->address?></td>
                     <td><?=$value->nama_role?></td>
+                    <td><?=$value->nama_depart?></td>
                     <td class="text-center" width="160px">
                       <form action="<?=site_url('user/del')?>" method="post">
                         <a href="<?=site_url('user/edit/'.$value->user_id)?>" class ="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>Update</a>

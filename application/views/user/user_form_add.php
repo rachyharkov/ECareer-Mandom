@@ -60,6 +60,16 @@
                     </select>
                   </div>
 
+                  <div class="form-group ">
+                    <label for="dept">Departemen*</label>
+                    <select name="dept" class="form-control">
+                      <option value="">-- Pilih -- </option>
+                      <?php foreach ($dept as $key => $data) {
+                        echo '<option value="'.$data->id_dept.'">'.$data->nama_dept.'</option>';
+                      } ?>
+                    </select>
+                  </div>
+
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-success btn"><i class="fa fa-paper-plane"></i>Save</button>

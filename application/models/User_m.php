@@ -13,9 +13,10 @@ class User_m extends CI_Model {
 
     public function get($id = null)
     {
-        $this->db->select('user.*,user_role.role as nama_role');
+        $this->db->select('user.*,user_role.role as nama_role,tbl_dept.nama_dept as nama_depart');
         $this->db->from('user');
         $this->db->join('user_role', 'user_role.id = user.level');
+        $this->db->join('tbl_dept', 'tbl_dept.id_dept = user.id_dept');
         if ($id !=null){
             $this->db->where('user_id', $id);
         }
@@ -31,6 +32,7 @@ class User_m extends CI_Model {
         $params['email'] = $post['email'];
         $params['address'] = $post['address'];
         $params['level'] = $post['level'];
+        $params['id_dept'] = $post['dept'];
         $this->db->insert('user',$params);
     }
 
@@ -51,6 +53,7 @@ class User_m extends CI_Model {
         }
         $params['address'] = $post['address'];
         $params['level'] = $post['level'];
+        $params['id_dept'] = $post['dept'];
         $this->db->where('user_id',$post['user_id']);
         $this->db->update('user',$params);
     }

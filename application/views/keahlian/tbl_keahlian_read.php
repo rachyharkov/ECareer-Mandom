@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">Tbl_keahlian Read</h2>
+        <h2 style="margin-top:0px">LIST KEAHLIAN</h2>
         <table class="table">
 	    <tr><td>Keahlian</td><td><?php echo $keahlian; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('keahlian') ?>" class="btn btn-default">Cancel</a></td></tr>

@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">Tbl_dept Read</h2>
+        <h2 style="margin-top:0px">DETAIL DEPARTEMENT</h2>
         <table class="table">
 	    <tr><td>Nama Dept</td><td><?php echo $nama_dept; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('dept') ?>" class="btn btn-default">Cancel</a></td></tr>

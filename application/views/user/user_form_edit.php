@@ -61,6 +61,20 @@
                     </select>
                   </div>
 
+                  <div class="form-group ">
+                    <label for="dept">Departemen*</label>
+                    <select name="dept" class="form-control">
+                      <option value="">-- Pilih -- </option>
+                      <?php foreach ($dept as $key => $data) { ?>
+                         <?php if ($row->id_dept==$data->id_dept) { ?>
+                        <option value="<?php echo $data->id_dept?>" selected><?php echo $data->nama_dept ?></option>    
+                        <?php }else{ ?>
+                        <option value="<?php echo $data->id_dept?>"><?php echo $data->nama_dept ?></option>      
+                      <?php } ?>
+                      <?php } ?>
+                    </select>
+                  </div>
+
 
 
 

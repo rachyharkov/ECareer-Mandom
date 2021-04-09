@@ -81,7 +81,7 @@ class Keahlian extends CI_Controller
 	    );
 
             $this->Keahlian_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $this->session->set_flashdata('oke', 'di Simpan');
             redirect(site_url('keahlian'));
         }
     }

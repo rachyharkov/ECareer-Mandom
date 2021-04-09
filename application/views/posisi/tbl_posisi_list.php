@@ -6,7 +6,7 @@
                 <div class="box box-warning box-solid">
     
                     <div class="box-header">
-                        <h3 class="box-title">KELOLA POSISI</h3>
+                        <h3 class="box-title">LIST POSISI</h3>
                     </div>        
                     <div class="box-body">
                         <div class='row'>

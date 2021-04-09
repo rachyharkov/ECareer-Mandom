@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">Tbl_fakultas Read</h2>
+        <h2 style="margin-top:0px">DETAIL FAKULTAS/JURUSAN</h2>
         <table class="table">
 	    <tr><td>Fakultas</td><td><?php echo $fakultas; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('fakultas') ?>" class="btn btn-default">Cancel</a></td></tr>

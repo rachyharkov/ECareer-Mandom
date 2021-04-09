@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/themify-icons/css/themify-icons.css">
     <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
+    <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css">
+    <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/dropify/css/dropify.min.css">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/main.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
@@ -74,7 +77,7 @@
               <a href="#pengajuan" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-clipboard"></i> <span class="title">E-Career Manage</span> <i class="icon-submenu ti-angle-left"></i></a>
               <div id="pengajuan" class="collapse ">
                 <ul class="submenu">
-                  <li><a href="<?= base_url() ?>tambah_pengajauan">Tambah Pengajuan</a></li>
+                  <li><a href="<?= base_url() ?>pengajuan_karyawan/create">Tambah Pengajuan</a></li>
                   <li><a href="<?= base_url() ?>pengajuan_karyawan">Cek Status Pengajuan</a></li>
                   <li><a href="<?= base_url() ?>pengajuan_list">Kelola Lowongan</a></li>
                 </ul>
@@ -209,15 +212,36 @@ echo $tahun;
     <script src="<?= base_url() ?>admin/assets/scripts/klorofilpro-common.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>admin/assets/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>admin/assets/js/sweetalert.js"></script>
+    <script src="<?php echo base_url();?>admin/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="<?= base_url() ?>admin/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> <!-- untuk sweet alret -->
     <script src="<?php echo base_url();?>admin/assets/js/dataflash.js"></script>
     <script src="<?= base_url() ?>admin/assets/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>admin/assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>admin/assets/vendor/dropify/js/dropify.min.js"></script>
     <script>
       $(document).ready(function() {
         $('#table1').DataTable()
         $('#table2').DataTable()
         $('#table3').DataTable()
+        $('#sp_keahlian').multiselect(
+        {
+          maxHeight: 300
+        });
+        $('.dropify').dropify();
+
+        $("#kdganti").click(function () {
+        if ($("#kdganti").is(":checked")) {
+            $("#karyawan_out")
+                .removeAttr("disabled")
+                .val('');
+        }
+        else {
+            $("#karyawan_out")
+                .attr("disabled", "disabled")
+                .val('');
+        }
+    });
       })
     </script>
   </body>

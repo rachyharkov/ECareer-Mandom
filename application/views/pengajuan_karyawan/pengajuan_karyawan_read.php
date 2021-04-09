@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">Pengajuan_karyawan Read</h2>
+        <h2 style="margin-top:0px">DETAIL PENGAJUAN KARYAWAN</h2>
         <table class="table">
 	    <tr><td>Tpk</td><td><?php echo $tpk; ?></td></tr>
 	    <tr><td>Id Dept</td><td><?php echo $id_dept; ?></td></tr>

@@ -5,7 +5,7 @@
                 <div class="box box-warning box-solid">
     
                     <div class="box-header">
-                        <h3 class="box-title">KELOLA KEAHLIAN</h3>
+                        <h3 class="box-title">LIST KEAHLIAN</h3>
                     </div>        
                     <div class="box-body">
                         <div class='row'>

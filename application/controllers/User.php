@@ -7,6 +7,7 @@ class User extends CI_Controller {
         parent::__construct();
         is_login();
         $this->load->model('user_m');
+        $this->load->model('Dept_model');
         $this->load->model('User_role_model');
         $this->load->library('form_validation');
     }
@@ -26,6 +27,7 @@ class User extends CI_Controller {
         	array('matches' => '%s Tidak Sesuai dengan Password')
     			);
         $this->form_validation->set_rules('level', 'Level', 'required');
+        $this->form_validation->set_rules('dept', 'Dept', 'required');
 
         $this->form_validation->set_message('required', '%s Masih kosong, Silahkan diisi');
         $this->form_validation->set_message('min_length', '%s Minimal 5 Karakter');
@@ -37,9 +39,11 @@ class User extends CI_Controller {
                 {
 
                     $level = $this->User_role_model->get()->result();
-                    $data = [
-                        'level' =>$level
-                    ];
+                    $deptlist = $this->Dept_model->get_all();
+                    $data = array(
+                        'level' =>$level,
+                        'dept'=>$deptlist
+                    );
                     $this->template->load('template','user/user_form_add',$data);
                 }
                 else
@@ -110,6 +114,7 @@ class User extends CI_Controller {
         }
 
         $this->form_validation->set_rules('level', 'Level', 'required');
+        $this->form_validation->set_rules('dept', 'Dept', 'required');
 
         $this->form_validation->set_message('required', '%s Masih kosong, Silahkan diisi');
         $this->form_validation->set_message('min_length', '%s Minimal 5 Karakter');
@@ -123,9 +128,11 @@ class User extends CI_Controller {
                     if($query->num_rows()>0)
                     {
                         $level = $this->User_role_model->get()->result();
-                        $data = [
-                            'level' =>$level
-                        ];
+                        $deptlist = $this->Dept_model->get_all();
+                        $data = array(
+                            'level' =>$level,
+                            'dept'=>$deptlist
+                        );
                         $data['row'] = $query->row();
                         $this->template->load('template','user/user_form_edit', $data);
                     }else

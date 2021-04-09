@@ -13,6 +13,7 @@ class Pengajuan_karyawan extends CI_Controller
         $this->load->model('Tingkat_pendidikan_model');
         $this->load->model('Fakultas_model');
         $this->load->model('Status_karyawan_model');
+        $this->load->model('Keahlian_model');
         $this->load->model('Priority_model');
         $this->load->model('Pengajuan_karyawan_model');
         $this->load->library('form_validation');        
@@ -71,40 +72,42 @@ class Pengajuan_karyawan extends CI_Controller
         $tingkatpendidikanlist = $this->Tingkat_pendidikan_model->get_all();
         $jflist = $this->Fakultas_model->get_all();
         $sklist = $this->Status_karyawan_model->get_all();
+        $skeahlist = $this->Keahlian_model->get_all();
         $plist = $this->Priority_model->get_all();
 
         $data = array(
             'button' => 'Create',
             'action' => site_url('pengajuan_karyawan/create_action'),
-	    'id_form' => set_value('id_form'),
-	    'tpk' => set_value('tpk'),
-	    'id_dept' => set_value('id_dept'),
-	    'tanggal_penempatan' => set_value('tanggal_penempatan'),
-	    'jks' => set_value('jks'),
-	    'id_posisi' => set_value('id_posisi'),
-	    'jenis_kelamin' => set_value('jenis_kelamin'),
-	    'batas_usia' => set_value('batas_usia'),
-	    'id_tingkat_pendidikan' => set_value('id_tingkat_pendidikan'),
-	    'id_jurusfakult' => set_value('id_jurusfakult'),
-	    'sp_keahlian' => set_value('sp_keahlian'),
-	    'pengalaman_kerja' => set_value('pengalaman_kerja'),
-	    'id_sk' => set_value('id_sk'),
-	    'estimasi_gaji' => set_value('estimasi_gaji'),
-	    'lptj' => set_value('lptj'),
-	    'dp_sot' => set_value('dp_sot'),
-	    'dp_jdesk' => set_value('dp_jdesk'),
-	    'catatan' => set_value('catatan'),
-	    'karyawan_out' => set_value('karyawan_out'),
-	    'tgl_pengajuan' => set_value('tgl_pengajuan'),
-	    'diajukanoleh' => set_value('diajukanoleh'),
-	    'priority_id' => set_value('priority_id'),
-	    'deptlist' =>$deptlist,
-            'pos' =>$poslist,
-            'tingkat_pendidikan' =>$tingkatpendidikanlist,
-            'fakultas' =>$jflist,
-            'keahlian' =>$sklist,
-            'prioritas' =>$plist
-	);
+		    'id_form' => set_value('id_form'),
+		    'tpk' => set_value('tpk'),
+		    'id_dept' => set_value('id_dept'),
+		    'tanggal_penempatan' => set_value('tanggal_penempatan'),
+		    'jks' => set_value('jks'),
+		    'id_posisi' => set_value('id_posisi'),
+		    'jenis_kelamin' => set_value('jenis_kelamin'),
+		    'batas_usia' => set_value('batas_usia'),
+		    'id_tingkat_pendidikan' => set_value('id_tingkat_pendidikan'),
+		    'id_jurusfakult' => set_value('id_jurusfakult'),
+		    'sp_keahlian' => set_value('sp_keahlian'),
+		    'pengalaman_kerja' => set_value('pengalaman_kerja'),
+		    'id_sk' => set_value('id_sk'),
+		    'estimasi_gaji' => set_value('estimasi_gaji'),
+		    'lptj' => set_value('lptj'),
+		    'dp_sot' => set_value('dp_sot'),
+		    'dp_jdesk' => set_value('dp_jdesk'),
+		    'catatan' => set_value('catatan'),
+		    'karyawan_out' => set_value('karyawan_out'),
+		    'tgl_pengajuan' => set_value('tgl_pengajuan'),
+		    'diajukanoleh' => set_value('diajukanoleh'),
+		    'priority_id' => set_value('priority_id'),
+		    'deptlist' =>$deptlist,
+	        'pos' =>$poslist,
+	        'tingkat_pendidikan' =>$tingkatpendidikanlist,
+	        'fakultas' =>$jflist,
+	        'keahlian' =>$skeahlist,
+	        'status_pekerja' =>$sklist,
+	        'prioritas' =>$plist
+		);
         $this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_form', $data);
     }
     
@@ -116,28 +119,28 @@ class Pengajuan_karyawan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'tpk' => $this->input->post('tpk',TRUE),
-		'id_dept' => $this->input->post('id_dept',TRUE),
-		'tanggal_penempatan' => $this->input->post('tanggal_penempatan',TRUE),
-		'jks' => $this->input->post('jks',TRUE),
-		'id_posisi' => $this->input->post('id_posisi',TRUE),
-		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
-		'batas_usia' => $this->input->post('batas_usia',TRUE),
-		'id_tingkat_pendidikan' => $this->input->post('id_tingkat_pendidikan',TRUE),
-		'id_jurusfakult' => $this->input->post('id_jurusfakult',TRUE),
-		'sp_keahlian' => $this->input->post('sp_keahlian',TRUE),
-		'pengalaman_kerja' => $this->input->post('pengalaman_kerja',TRUE),
-		'id_sk' => $this->input->post('id_sk',TRUE),
-		'estimasi_gaji' => $this->input->post('estimasi_gaji',TRUE),
-		'lptj' => $this->input->post('lptj',TRUE),
-		'dp_sot' => $this->input->post('dp_sot',TRUE),
-		'dp_jdesk' => $this->input->post('dp_jdesk',TRUE),
-		'catatan' => $this->input->post('catatan',TRUE),
-		'karyawan_out' => $this->input->post('karyawan_out',TRUE),
-		'tgl_pengajuan' => $this->input->post('tgl_pengajuan',TRUE),
-		'diajukanoleh' => $this->input->post('diajukanoleh',TRUE),
-		'priority_id' => $this->input->post('priority_id',TRUE),
-	    );
+				'tpk' => $this->input->post('tpk',TRUE),
+				'id_dept' => $this->input->post('id_dept',TRUE),
+				'tanggal_penempatan' => $this->input->post('tanggal_penempatan',TRUE),
+				'jks' => $this->input->post('jks',TRUE),
+				'id_posisi' => $this->input->post('id_posisi',TRUE),
+				'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
+				'batas_usia' => $this->input->post('batas_usia',TRUE),
+				'id_tingkat_pendidikan' => $this->input->post('id_tingkat_pendidikan',TRUE),
+				'id_jurusfakult' => $this->input->post('id_jurusfakult',TRUE),
+				'sp_keahlian' => $this->input->post('sp_keahlian',TRUE),
+				'pengalaman_kerja' => $this->input->post('pengalaman_kerja',TRUE),
+				'id_sk' => $this->input->post('id_sk',TRUE),
+				'estimasi_gaji' => $this->input->post('estimasi_gaji',TRUE),
+				'lptj' => $this->input->post('lptj',TRUE),
+				'dp_sot' => $this->input->post('dp_sot',TRUE),
+				'dp_jdesk' => $this->input->post('dp_jdesk',TRUE),
+				'catatan' => $this->input->post('catatan',TRUE),
+				'karyawan_out' => $this->input->post('karyawan_out',TRUE),
+				'tgl_pengajuan' => $this->input->post('tgl_pengajuan',TRUE),
+				'diajukanoleh' => $this->input->post('diajukanoleh',TRUE),
+				'priority_id' => $this->input->post('priority_id',TRUE),
+		    );
             $this->Pengajuan_karyawan_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('pengajuan_karyawan'));
