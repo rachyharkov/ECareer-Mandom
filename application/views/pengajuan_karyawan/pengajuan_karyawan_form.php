@@ -9,14 +9,13 @@
                     </div>        
                     <div class="box-body">
                         <div class='row' style="padding: 15px;">
-                            <form action="<?php echo $action; ?>" method="post">
+                            <form action="<?php echo $action; ?>" role="form" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="varchar">Tujuan Permintaaan Karyawan <?php echo form_error('tpk') ?></label>
                                 <select id="tpk" name="tpk" class="form-control">
                                     <option value="">-- Pilih --</option>
-                                    <option <?php echo ($tpk)?"":"hidden"?> value="<?php echo $tpk; ?>"><?php echo $tpk; ?></option>
-                                    <option value="<?php echo($tpk == 'Penambahan')?'Penambahan':'Penggantian'; ?>"><?php echo($tpk == 'Penambahan')?'Penambahan':'Penggantian'; ?></option>
-                                    <option value="<?php echo($tpk == 'Penggantian')?'Penggantian':'Penambahan';?>"><?php echo($tpk == 'Penggantian')?'Penggantian':'Penambahan';?></option>
+                                    <option value="Penambahan" <?php echo($tpk == 'Penambahan')?'selected':''; ?>>Penambahan</option>
+                                    <option value="Penggantian" <?php echo($tpk == 'Penggantian')?'selected':''; ?>>Penggantian</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -101,10 +100,10 @@
                                                 <label for="int">Syarat Keahlian <?php echo form_error('sp_keahlian') ?></label><br>
                                                 <select name="sp_keahlian[]" id="sp_keahlian" class="multiselect form-control" multiple="multiple">
                                                     <?php foreach ($keahlian as $klh) { ?>
-                                                        <?php if ($sp_keahlian==$klh->id_keahlian) { ?>
-                                                            <option value="<?php echo $klh->id_keahlian?>" selected><?php echo $klh->keahlian ?></option>    
+                                                        <?php if ($sp_keahlian==$klh->keahlian) { ?>
+                                                            <option value="<?php echo $klh->keahlian?>" selected><?php echo $klh->keahlian ?></option>    
                                                             <?php }else{ ?>
-                                                            <option value="<?php echo $klh->id_keahlian?>"><?php echo $klh->keahlian ?></option>      
+                                                            <option value="<?php echo $klh->keahlian?>"><?php echo $klh->keahlian ?></option>      
                                                         <?php } ?>
                                                     <?php } ?>
                                                     
@@ -139,7 +138,7 @@
                                             </div>
                                             <?php 
 
-                                                if ($dp_sot) {
+                                                if ($dp_sot && $dp_jdesk) {
                                                     echo "";
                                                 } else {
                                                     ?>
@@ -152,7 +151,7 @@
                                                                         <input name="dp_sot" id="dp_sot" type="file" class="dropify">
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <label for="varchar">Job Description <?php echo form_error('dp_sot') ?></label>
+                                                                        <label for="varchar">Job Description <?php echo form_error('dp_jdesk') ?></label>
                                                                         <input name="dp_jdesk" id="dp_jdesk" type="file" class="dropify">
                                                                     </div>
                                                                 </div>
@@ -169,10 +168,10 @@
                                                 <div class="fancy-checkbox custom-bgcolor-blue">
                                                     <label>
                                                         <input type="checkbox" name="kdganti" id="kdganti">
-                                                        <span for="varchar" style="font-weight: bold;">Karyawan Keluar/Diganti? <?php echo form_error('karyawan_out') ?></span>
+                                                        <span for="varchar" style="font-weight: bold;">Karyawan Keluar/Diganti?</span>
                                                     </label>
                                                 </div>
-                                                <input type="text" class="form-control" name="karyawan_out" id="karyawan_out" placeholder="Karyawan Out" value="<?php echo $karyawan_out; ?>" disabled />
+                                                <input type="text" class="form-control" name="karyawan_out" id="karyawan_out" placeholder="Karyawan Out" value="Tidak Ada" style="display: none;" />
                                             </div>            
                                         </div>
                                     </div>

@@ -35,8 +35,17 @@ class Pengajuan_karyawan_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->select('pengajuan_karyawan.*,tbl_dept.*,tbl_fakultas.*,tbl_posisi.*,tbl_priority.*,tbl_tingkat_pendidikan.*,status_karyawan.*')
+        ->from('pengajuan_karyawan')
+            ->join('tbl_dept','tbl_dept.id_dept = pengajuan_karyawan.id_dept')
+            ->join('tbl_fakultas','tbl_fakultas.id_fakultas = pengajuan_karyawan.id_jurusfakult')
+            ->join('tbl_posisi','tbl_posisi.id_posisi = pengajuan_karyawan.id_posisi')
+            ->join('tbl_priority','tbl_priority.id_priority = pengajuan_karyawan.priority_id')
+            ->join('tbl_tingkat_pendidikan','tbl_tingkat_pendidikan.id_tingkat_pendidikan = pengajuan_karyawan.id_tingkat_pendidikan')
+            ->join('status_karyawan','status_karyawan.status_karyawan_id = pengajuan_karyawan.id_sk');
+        $this->db->where('pengajuan_karyawan.id_form', $id);
+        $query = $this->db->get();
+        return $query->row();
     }
     
     // get total rows
@@ -97,9 +106,10 @@ class Pengajuan_karyawan_model extends CI_Model
     }
 
     // insert data
-    function insert($data)
+    function insert($table,$data)
     {
-        $this->db->insert($this->table, $data);
+        $insert = $this->db->insert($table,$data);
+        return $insert;
     }
 
     // update data
@@ -114,6 +124,22 @@ class Pengajuan_karyawan_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+
+    function GenerateId() {
+        $query = $this->db->select($this->id)
+                          ->limit(1)
+                          ->order_by('id_form','DESC')
+                          ->get($this->table);
+        $row = $query->last_row();
+        if($row){
+            $idPostfix = (int)substr($row->id_form,15)+1;
+            $nextId = 'FR-PK-'.date('dmY').'-'.STR_PAD((string)$idPostfix,5,"0",STR_PAD_LEFT);
+        }
+        else{
+            $nextId = 'FR-PK-'.date('dmY').'-00001';
+        } // For the first time
+        return $nextId;
     }
 
 }

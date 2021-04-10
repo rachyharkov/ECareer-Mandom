@@ -233,13 +233,13 @@ echo $tahun;
         $("#kdganti").click(function () {
         if ($("#kdganti").is(":checked")) {
             $("#karyawan_out")
-                .removeAttr("disabled")
-                .val('');
+                .css("display","unset")
+                .val('Nama Karyawan yang keluar');
         }
         else {
             $("#karyawan_out")
-                .attr("disabled", "disabled")
-                .val('');
+                .css("display","none")
+                .val('Tidak Ada');
         }
     });
       })

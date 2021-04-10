@@ -26,8 +26,7 @@ class Auth extends CI_Controller {
         $row =$query->row();
         $params = array(
           'userid'=>$row->user_id,
-          'level' =>$row->level,
-          'deptid' =>$row->id_dept
+          'level' =>$row->level
         );
         $this->session->set_userdata($params);
         $this->user_m->addHistory($this->fungsi->user_login()->name, $this->fungsi->user_login()->name.' Telah melakukan login', date('d/m/Y H:i:s'), $_SERVER['HTTP_USER_AGENT']);
