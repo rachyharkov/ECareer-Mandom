@@ -78,8 +78,8 @@
               <div id="pengajuan" class="collapse ">
                 <ul class="submenu">
                   <li><a href="<?= base_url() ?>pengajuan_karyawan/create">Tambah Pengajuan</a></li>
-                  <li><a href="<?= base_url() ?>pengajuan_karyawan">Cek Status Pengajuan</a></li>
-                  <li><a href="<?= base_url() ?>pengajuan_list">Kelola Lowongan</a></li>
+                  <li><a href="<?= base_url() ?>pengajuan_karyawan">List Pengajuan <span class="badge badge-warning"><?= ucfirst($this->fungsi->count_pending()) ?></span></a></li>
+                  <li><a href="<?= base_url() ?>ecareer_posted">Kelola Lowongan</a></li>
                 </ul>
               </div>
             </li>
@@ -87,15 +87,21 @@
               <a href="#pengaturan" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
               <div id="pengaturan" class="collapse">
                 <ul class="submenu">
-                  <li><a href="<?= base_url() ?>user">Kelola User</a></li>
-                  <li><a href="<?= base_url() ?>user_role">Kelola Level</a></li>
-                  <li><a href="<?= base_url() ?>dept">Kelola Departement</a></li>
-                  <li><a href="<?= base_url() ?>posisi">Kelola Posisi</a></li>
-                  <li><a href="<?= base_url() ?>Tingkat_pendidikan">Kelola Tingkat Pendidikan</a></li>
-                  <li><a href="<?= base_url() ?>Fakultas">Kelola Fakultas</a></li>
-                  <li><a href="<?= base_url() ?>Keahlian">Kelola Keahlian</a></li>
-                  <li><a href="<?= base_url() ?>Status_karyawan">Kelola Status Kerja</a></li>
-                  <li><a href="<?= base_url() ?>Priority">Kelola Prioritas</a></li>
+                  <?php
+                  if ($this->session->userdata("level") == 1) {
+                    ?>
+                      <li><a href="<?= base_url() ?>user">Kelola User</a></li>
+                      <li><a href="<?= base_url() ?>user_role">Kelola Level</a></li>
+                      <li><a href="<?= base_url() ?>dept">Kelola Departement</a></li>
+                      <li><a href="<?= base_url() ?>posisi">Kelola Posisi</a></li>
+                      <li><a href="<?= base_url() ?>Tingkat_pendidikan">Kelola Tingkat Pendidikan</a></li>
+                      <li><a href="<?= base_url() ?>Fakultas">Kelola Fakultas</a></li>
+                      <li><a href="<?= base_url() ?>Keahlian">Kelola Keahlian</a></li>
+                      <li><a href="<?= base_url() ?>Status_karyawan">Kelola Status Kerja</a></li>
+                      <li><a href="<?= base_url() ?>Priority">Kelola Prioritas</a></li>
+                    <?php
+                  }
+                  ?>
                   <li><a href="<?= base_url() ?>backup">Backup Database</a></li>
                   <li><a href="<?= base_url() ?>History_karyawan">History Login</a></li>
                 </ul>
@@ -224,6 +230,8 @@ echo $tahun;
         $('#table1').DataTable()
         $('#table2').DataTable()
         $('#table3').DataTable()
+        $('[data-toggle="popover"]').popover();
+
         $('#sp_keahlian').multiselect(
         {
           maxHeight: 300

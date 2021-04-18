@@ -11,13 +11,11 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-
 		$user_session = $this->session->userdata('userid');
 		if (!$user_session) {
 			redirect('auth/login');
-		}else{
+		} else {
 			$this->template->load('template','dashboard');
 		}
-		
 	}
 }

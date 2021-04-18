@@ -9,7 +9,7 @@
                     </div>        
                     <div class="box-body">
                         <div class='row' style="padding: 15px;">
-                            <form action="<?php echo $action; ?>" role="form" method="post" enctype="multipart/form-data">
+                            <form action="<?php echo $action; ?>" role="form" method="post" enctype="multipart/form-data" autocomplete="off">
                             <div class="form-group">
                                 <label for="varchar">Tujuan Permintaaan Karyawan <?php echo form_error('tpk') ?></label>
                                 <select id="tpk" name="tpk" class="form-control">
@@ -19,11 +19,11 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="varchar">Departemenn<?php echo form_error('id_dept') ?></label>
+                                <label for="varchar">Pilih Departemen anda <?php echo form_error('id_dept') ?></label>
                                 <select name="id_dept" id="id_dept" class="form-control">
                                     <option value="">-- Pilih --</option>
                                     <?php foreach ($deptlist as $o) { ?>
-                                        <?php if ($id_dept==$o->id_dept) { ?>
+                                        <?php if ($o->id_dept==$this->fungsi->user_login()->id_dept) { ?>
                                             <option value="<?php echo $o->id_dept?>" selected><?php echo $o->nama_dept ?></option>    
                                             <?php }else{ ?>
                                             <option value="<?php echo $o->id_dept?>"><?php echo $o->nama_dept ?></option>      

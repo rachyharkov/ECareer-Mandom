@@ -60,15 +60,13 @@ function is_login(){
     function check_admin(){
         $ci =& get_instance();
         $ci->load->library('fungsi');
-        if($ci->fungsi->user_login()->level !=1 ){
+        if($ci->fungsi->user_login()->level !=1){
             redirect('dashboard');
-
         }
 
     }
 
 function rupiah($angka){
-    
     $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
     return $hasil_rupiah;
 }

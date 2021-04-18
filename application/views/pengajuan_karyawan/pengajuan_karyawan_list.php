@@ -40,15 +40,15 @@
         <table class="table table-bordered table-striped" id="mytable">
             <thead>
                 <tr>
-                    <th width="80px">No</th>
-                <th>ID Form Pengajuan</th>
-                <th>Tpk</th>
-                <th>Departemen</th>
-                <th>Posisi</th>
-                <th>Tgl Pengajuan</th>
-                <th>Diajukanoleh</th>
-                <th>Prioritas</th>
-            <th width="200px">Action</th>
+                    <th>No</th>
+                    <th>ID Form Pengajuan</th>
+                    <th>Tpk</th>
+                    <th>Departemen</th>
+                    <th>Posisi</th>
+                    <th>Tgl Pengajuan</th>
+                    <th>Prioritas</th>
+                    <th>Status</th>
+                    <th width="200px">Action</th>
                 </tr>
             </thead>
         
@@ -92,7 +92,7 @@
                         {
                             "data": "id_form",
                             "orderable": false
-                        },{"data": "id_form"},{"data": "tpk"},{"data": "id_dept"},{"data": "id_posisi"},{"data": "tgl_pengajuan"},{"data": "diajukanoleh"},{"data": "priority_id"},
+                        },{"data": "id_form"},{"data": "tpk"},{"data": "id_dept"},{"data": "id_posisi"},{"data": "tgl_pengajuan"},{"data": "priority_id"},{"data": "status_pengajuan", render: function(data){if (data == "Pending") {return '<span class="label label-warning">'+ data +'</span>'} else if (data == "Ditolak") {return '<span class="label label-danger">' + data + '</span>'} else {return '<span class="label label-success">'+ data +'</span>'}}},
                         {
                             "data" : "action",
                             "orderable": false,

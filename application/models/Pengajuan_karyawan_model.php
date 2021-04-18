@@ -13,15 +13,17 @@ class Pengajuan_karyawan_model extends CI_Model
     function __construct()
     {
         parent::__construct();
+        $this->load->library('session');
     }
 
     // datatables
     function json() {
-        $this->datatables->select('id_form,tpk,id_dept,tanggal_penempatan,jks,id_posisi,jenis_kelamin,batas_usia,id_tingkat_pendidikan,id_jurusfakult,sp_keahlian,pengalaman_kerja,id_sk,estimasi_gaji,lptj,dp_sot,dp_jdesk,catatan,karyawan_out,tgl_pengajuan,diajukanoleh,priority_id');
+        $this->datatables->select('pengajuan_karyawan.*,tbl_dept.*');
         $this->datatables->from('pengajuan_karyawan');
         //add this line for join
-        //$this->datatables->join('table2', 'pengajuan_karyawan.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('pengajuan_karyawan/read/$1'),'Read')." | ".anchor(site_url('pengajuan_karyawan/update/$1'),'Update')." | ".anchor(site_url('pengajuan_karyawan/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_form');
+        $this->datatables->join('tbl_dept', 'tbl_dept.id_dept = pengajuan_karyawan.id_dept');
+        $this->datatables->where('tbl_dept.id_dept',$this->session->userdata('id_dept'));
+        $this->datatables->add_column('action', anchor(site_url('pengajuan_karyawan/read/$1'),'Read')." | ".anchor(site_url('pengajuan_karyawan/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_form');
         return $this->datatables->generate();
     }
 
@@ -103,6 +105,99 @@ class Pengajuan_karyawan_model extends CI_Model
 	$this->db->or_like('priority_id', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
+    }
+
+    function countpendingpengajuan()
+    {
+        $whereforuser = array(
+                'status_pengajuan' => 'Pending',
+                'id_dept' => $this->fungsi->user_login()->id_dept
+        );
+        $whereforhighlevel = array(
+                'status_pengajuan' => 'Pending',
+        );
+
+        
+        if (!$this->fungsi->user_login()->id_dept == 1 || $this->fungsi->user_login()->id_dept == 2 ) {
+            $this->db->select('status_pengajuan');
+            $this->db->from('pengajuan_karyawan');
+            $this->db->where($whereforuser);
+        } else {
+            $this->db->select('status_pengajuan');
+            $this->db->from('pengajuan_karyawan');
+            $this->db->where($whereforhighlevel);
+        }
+        $query = $this->db->count_all_results();
+        return $query;
+    }
+
+    function countditolakpengajuan()
+    {
+        $whereforuser = array(
+                'status_pengajuan' => 'Ditolak',
+                'id_dept' => $this->fungsi->user_login()->id_dept
+        );
+        $whereforhighlevel = array(
+                'status_pengajuan' => 'Ditolak',
+        );
+
+        
+        if (!$this->fungsi->user_login()->id_dept == 1 || $this->fungsi->user_login()->id_dept == 2 ) {
+            $this->db->select('status_pengajuan');
+            $this->db->from('pengajuan_karyawan');
+            $this->db->where($whereforuser);
+        } else {
+            $this->db->select('status_pengajuan');
+            $this->db->from('pengajuan_karyawan');
+            $this->db->where($whereforhighlevel);
+        }
+        $query = $this->db->count_all_results();
+        return $query;
+    }
+    function countditerimapengajuan()
+    {
+        $whereforuser = array(
+                'status_pengajuan' => 'Diterima',
+                'id_dept' => $this->fungsi->user_login()->id_dept
+        );
+        $whereforhighlevel = array(
+                'status_pengajuan' => 'Diterima',
+        );
+
+        
+        if (!$this->fungsi->user_login()->id_dept == 1 || $this->fungsi->user_login()->id_dept == 2 ) {
+            $this->db->select('status_pengajuan');
+            $this->db->from('pengajuan_karyawan');
+            $this->db->where($whereforuser);
+        } else {
+            $this->db->select('status_pengajuan');
+            $this->db->from('pengajuan_karyawan');
+            $this->db->where($whereforhighlevel);
+        }
+        $query = $this->db->count_all_results();
+        return $query;
+    }
+    function countpelamartoday()
+    {
+        $whereforuser = array(
+                'status_pengajuan' => 'Pending',
+                'id_dept' => $this->fungsi->user_login()->id_dept
+        );
+        $whereforhighlevel = array(
+                'status_pengajuan' => 'Pending',
+        );
+
+        if (!$this->fungsi->user_login()->id_dept == 1 || $this->fungsi->user_login()->id_dept == 2 ) {
+            $this->db->select('status_pengajuan');
+            $this->db->from('pengajuan_karyawan');
+            $this->db->where($whereforuser);
+        } else {
+            $this->db->select('status_pengajuan');
+            $this->db->from('pengajuan_karyawan');
+            $this->db->where($whereforhighlevel);
+        }
+        $query = $this->db->count_all_results();
+        return $query;
     }
 
     // insert data

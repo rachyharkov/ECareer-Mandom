@@ -18,14 +18,14 @@ class Pengajuan_karyawan extends CI_Controller
         $this->load->model('Pengajuan_karyawan_model');
         $this->load->library('form_validation');        
 		$this->load->library('datatables');
-
 		$this->load->helper(array('form', 'url'));
+		$this->load->library('session');
     }
 
     public function index()
     {
-    	$this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_list');
-    } 
+		$this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_list');
+    }
     
     public function json() {
         header('Content-Type: application/json');
@@ -39,17 +39,17 @@ class Pengajuan_karyawan extends CI_Controller
             $data = array(
 				'id_form' => $row->id_form,
 				'tpk' => $row->tpk,
-				'id_dept' => $row->id_dept,
+				'id_dept' => $row->nama_dept,
 				'tanggal_penempatan' => $row->tanggal_penempatan,
 				'jks' => $row->jks,
-				'id_posisi' => $row->id_posisi,
+				'id_posisi' => $row->nama_posisi,
 				'jenis_kelamin' => $row->jenis_kelamin,
 				'batas_usia' => $row->batas_usia,
-				'id_tingkat_pendidikan' => $row->id_tingkat_pendidikan,
-				'id_jurusfakult' => $row->id_jurusfakult,
+				'id_tingkat_pendidikan' => $row->tingkat_pendidikan,
+				'id_jurusfakult' => $row->fakultas,
 				'sp_keahlian' => $row->sp_keahlian,
 				'pengalaman_kerja' => $row->pengalaman_kerja,
-				'id_sk' => $row->id_sk,
+				'id_sk' => $row->nama_status_karyawan,
 				'estimasi_gaji' => $row->estimasi_gaji,
 				'lptj' => $row->lptj,
 				'dp_sot' => $row->dp_sot,
@@ -58,7 +58,9 @@ class Pengajuan_karyawan extends CI_Controller
 				'karyawan_out' => $row->karyawan_out,
 				'tgl_pengajuan' => $row->tgl_pengajuan,
 				'diajukanoleh' => $row->diajukanoleh,
-				'priority_id' => $row->priority_id,
+				'priority_id' => $row->prioritas,
+				'status_pengajuan' => $row->status_pengajuan,
+				'keterangan' => $row->keterangan
 		    );
 		    $this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_read',$data);
         } else {
@@ -174,7 +176,10 @@ class Pengajuan_karyawan extends CI_Controller
 				'catatan' => $this->input->post('catatan',TRUE),
 				'karyawan_out' => $this->input->post('karyawan_out'),
 				'diajukanoleh' => $this->fungsi->user_login()->name,
-				'priority_id' => $this->input->post('priority_id',TRUE)
+				'priority_id' => $this->input->post('priority_id',TRUE),
+				'status_pengajuan' => "Pending",
+				'diapprove' => "NA",
+				'keterangan' => "NA"
 			);
             $this->Pengajuan_karyawan_model->insert('pengajuan_karyawan',$data);
             $this->session->set_flashdata('oke', 'di Simpan');
@@ -261,8 +266,10 @@ class Pengajuan_karyawan extends CI_Controller
         $row = $this->Pengajuan_karyawan_model->get_by_id($id);
 
         if ($row) {
+        	unlink($row->dp_sot);
+        	unlink($row->dp_jdesk);
             $this->Pengajuan_karyawan_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('oke', 'di Hapus');
             redirect(site_url('pengajuan_karyawan'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');

@@ -17,16 +17,24 @@ Class Fungsi{
         $this->ci->load->model('karyawan_model');
         return $this->ci->karyawan_model->total_rows();
     }
-    public function count_jabatan(){
-        $this->ci->load->model('jabatan_model');
-        return $this->ci->jabatan_model->total_rows();
+    public function count_pelamar_today(){
+        $this->ci->load->model('Pengajuan_karyawan_model');
+        $count = $this->ci->Pengajuan_karyawan_model->countpelamartoday();
+        return $count;
     }
-    public function count_bank(){
-        $this->ci->load->model('bank_model');
-        return $this->ci->bank_model->total_rows();
+    public function count_approved(){
+        $this->ci->load->model('Pengajuan_karyawan_model');
+        $count = $this->ci->Pengajuan_karyawan_model->countditerimapengajuan();
+        return $count;
     }
-    public function count_status(){
-        $this->ci->load->model('status_karyawan_model');
-        return $this->ci->status_karyawan_model->total_rows();
+    public function count_ditolak(){
+        $this->ci->load->model('Pengajuan_karyawan_model');
+        $count = $this->ci->Pengajuan_karyawan_model->countditolakpengajuan();
+        return $count;
+    }
+    public function count_pending(){
+        $this->ci->load->model('Pengajuan_karyawan_model');
+        $count = $this->ci->Pengajuan_karyawan_model->countpendingpengajuan();
+        return $count;
     }
 }
