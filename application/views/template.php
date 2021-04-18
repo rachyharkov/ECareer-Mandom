@@ -225,6 +225,7 @@ echo $tahun;
     <script src="<?= base_url() ?>admin/assets/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>admin/assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="<?= base_url() ?>admin/assets/vendor/dropify/js/dropify.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/signature.js"></script>
     <script>
       $(document).ready(function() {
         $('#table1').DataTable()

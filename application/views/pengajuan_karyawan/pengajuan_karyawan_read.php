@@ -16,7 +16,7 @@
 ?> </h2>
 <table class="table">
     <tr><td>Tujuan Permintaan Karyawan</td><td><?php echo $tpk; ?></td></tr>
-    <tr><td>Departemen</td><td><?php echo $id_dept; ?></td></tr>
+    <tr><td>Oleh Departemen</td><td><?php echo $id_dept; ?></td></tr>
     <tr><td>Tanggal Penempatan</td><td><?php echo $tanggal_penempatan; ?></td></tr>
     <tr><td>Jumlah Kebutuhan SDM</td><td><?php echo $jks; ?></td></tr>
     <tr><td>Posisi</td><td><?php echo $id_posisi; ?></td></tr>
@@ -66,12 +66,51 @@
     	</td>
     </tr>
     <tr>
+        <td>
+            <h4>Status Persetujuan</h4>
+        </td>
+    </tr>
+    <tr>
+        <td>HR/GA</td>
+        <td><?php if($tandatanganhrga == 'NA')
+            {
+                ?>
+                <span class="badge bg-warning" style="padding: 6px;margin-top: -9px;"><i class="fa fa-clock-o"></i> Pending</span>                
+                <?php
+            }else{
+                ?>
+                <img src="<?php echo base_url().$tandatanganhrga ?>" width="120">
+                <?php
+            } ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Direktur</td>
+        <td><?php if($tandatangandirektur == 'NA')
+            {
+                ?>
+                <span class="badge bg-warning" style="padding: 6px;margin-top: -9px;"><i class="fa fa-clock-o"></i> Pending</span>                
+                <?php
+            }else{
+                ?>
+                <img src="<?php echo base_url().$tandatangandirektur ?>" width="120">
+                <?php
+            } ?>
+        </td>
+    </tr>
+    <tr>
     	<td>		
     	   <?php
-           if ($this->fungsi->user_login('id_dept') == '1' || $this->fungsi->user_login('id_dept') == '2') {
+           if ($this->fungsi->user_login()->id_dept == '1') {
                ?>
-                    <a href="<?php echo site_url('pengajuan_karyawan/approve') ?>" class="btn btn-primary">Approve</a>
-                    <a href="<?php echo site_url('pengajuan_karyawan/declined') ?>" class="btn btn-danger">Declined</a>		
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#small-modal" <?php if ($tandatanganhrga != 'NA') {echo "disabled";} ?>>Approve</button>
+                    <a href="<?php echo site_url('pengajuan_karyawan/declined') ?>" class="btn btn-danger" <?php if ($tandatanganhrga != 'NA') {echo "disabled";} ?>>Declined</a>		
+               <?php
+           }
+           if ($this->fungsi->user_login()->id_dept == '2') {
+               ?>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#small-modal" <?php if ($tandatangandirektur != 'NA') {echo "disabled";} ?> <?php if ($tandatangandirektur != 'NA') {echo "disabled";} ?>>Approve</button>
+                    <a href="<?php echo site_url('pengajuan_karyawan/declined') ?>" class="btn btn-danger">Declined</a>     
                <?php
            }
            ?>

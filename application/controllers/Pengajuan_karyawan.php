@@ -30,7 +30,11 @@ class Pengajuan_karyawan extends CI_Controller
     
     public function json() {
         header('Content-Type: application/json');
-        echo $this->Pengajuan_karyawan_model->json();
+        if ($this->fungsi->user_login()->id_dept == '1' || $this->fungsi->user_login()->id_dept == '2') {
+        	echo $this->Pengajuan_karyawan_model->jsonall();
+        } else {
+        	echo $this->Pengajuan_karyawan_model->jsondepartement();
+        }
     }
 
     public function read($id) 
@@ -61,9 +65,22 @@ class Pengajuan_karyawan extends CI_Controller
 				'diajukanoleh' => $row->diajukanoleh,
 				'priority_id' => $row->prioritas,
 				'status_pengajuan' => $row->status_pengajuan,
-				'keterangan' => $row->keterangan
+				'keterangan' => $row->keterangan,
+				'tandatanganhrga' => $row->tandatanganhrga,
+				'tandatangandirektur' => $row->tandatangandirektur
 		    );
-		    $this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_read',$data);
+        	if ($this->fungsi->user_login()->id_dept == $row->id_dept) {
+        		$this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_read',$data);
+        	} else if($this->fungsi->user_login()->id_dept == '1') {
+			    $this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_read',$data);
+			    $this->load->view('pengajuan_karyawan/direktur_signature');
+        	} else if($this->fungsi->user_login()->id_dept == '2'){
+        		$this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_read',$data);
+			    $this->load->view('pengajuan_karyawan/hrga_signature');
+			} else {
+        		$this->session->set_flashdata('message', 'You dont have access to that data!');
+            	redirect(site_url('pengajuan_karyawan'));	
+        	}
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('pengajuan_karyawan'));
@@ -127,7 +144,7 @@ class Pengajuan_karyawan extends CI_Controller
         	$config1['upload_path']          = './lampiran/';
 			$config1['allowed_types']        = 'docx';
 			$config1['max_size']             = 2048;
-			$config1['file_name']			= date('dmYhms').'SOT.docx';
+			$config1['file_name']			= date('dmYhm').'SOT.docx';
 
 			$filename1 = 'NULL';	
 			$filename2 = 'NULL';
@@ -140,20 +157,20 @@ class Pengajuan_karyawan extends CI_Controller
 				$this->filesot->initialize($config1);
 				$this->filesot->do_upload('dp_sot');			
          		$file1 = 'lampiran/';
-				$filename1 = date('dmYhms').'SOT.docx';
+				$filename1 = date('dmYhm').'SOT.docx';
 			}
 
 			$config2['upload_path']          = './lampiran/';
 			$config2['allowed_types']        = 'docx';
 			$config2['max_size']             = 2048;
-			$config2['file_name']			= date('dmYhms').'JDESK.docx';
+			$config2['file_name']			= date('dmYhm').'JDESK.docx';
 
 			if(!empty($_FILES['dp_jdesk']['name'])) {
 	         	$this->load->library('upload', $config2,'filejsdesk'); //buat custom object filejsdesk
 				$this->filejsdesk->initialize($config2);
 				$this->filejsdesk->do_upload('dp_jdesk');				
          		$file2 = 'lampiran/';
-				$filename2 = date('dmYhms').'JDESK.docx';
+				$filename2 = date('dmYhm').'JDESK.docx';
 			}
 
      		$data = array(
@@ -179,7 +196,8 @@ class Pengajuan_karyawan extends CI_Controller
 				'diajukanoleh' => $this->fungsi->user_login()->name,
 				'priority_id' => $this->input->post('priority_id',TRUE),
 				'status_pengajuan' => "Pending",
-				'diapprove' => "NA",
+				'tandatanganhrga' => "NA",
+				'tandatangandirektur' => "NA",
 				'keterangan' => "NA"
 			);
             $this->Pengajuan_karyawan_model->insert('pengajuan_karyawan',$data);
@@ -269,6 +287,8 @@ class Pengajuan_karyawan extends CI_Controller
         if ($row) {
         	unlink($row->dp_sot);
         	unlink($row->dp_jdesk);
+        	unlink($row->tandatangandirektur);
+        	unlink($row->tandatanganhrga);
             $this->Pengajuan_karyawan_model->delete($id);
             $this->session->set_flashdata('oke', 'di Hapus');
             redirect(site_url('pengajuan_karyawan'));
@@ -395,6 +415,80 @@ class Pengajuan_karyawan extends CI_Controller
         
         $this->load->view('pengajuan_karyawan/pengajuan_karyawan_doc',$data);
     }
+
+    public function approve()
+    {
+		$output_file = "lampiran/signature" . date("Y-m-d-H-i-s-").time(). ".png";
+		$signaturedirektur = array(
+			'tandatangandirektur' 		=> $output_file,
+			'status_pengajuan'			=> 'Diterima'
+	    );
+	    $signaturehrga = array(
+			'tandatangandirektur' => $output_file
+	    );
+    	if ($this->fungsi->user_login()->id_dept == '1') {
+            $this->Pengajuan_karyawan_model->update($this->input->post('idform', TRUE), $signaturedirektur);
+            $this->session->set_flashdata('oke', 'Persetujuan oleh HR/GA telah dilakukan');
+			$this->base64_to_jpeg($_POST["image"], $output_file);
+			$this->add_mark($output_file, $output_file);
+            redirect(site_url('pengajuan_karyawan'));
+    	}
+
+    	if ($this->fungsi->user_login()->id_dept == '2') {
+            $this->Pengajuan_karyawan_model->update($this->input->post('idform', TRUE), $signaturedirektur);
+            $this->session->set_flashdata('oke', 'Persetujuan oleh Direktur telah dilakukan');
+			$this->base64_to_jpeg($_POST["image"], $output_file);
+			$this->add_mark($output_file, $output_file);
+            redirect(site_url('pengajuan_karyawan'));
+    	}
+    }
+
+    //this is for fetching image using php puprose
+    function geturlonly() {
+	    $urlpath = explode('/', $_SERVER['PHP_SELF']);
+	    array_pop($urlpath);
+	    $scriptname = implode("/", $urlpath);
+	    $http_protocol = 'http';
+	    if((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['SERVER_PORT'] == 443)){
+	      $http_protocol = 'https';
+	    }
+	    return $http_protocol . "://" . $_SERVER["HTTP_HOST"] . $scriptname . "/";
+	}
+
+
+	function base64_to_jpeg($base64_string, $output_file) {
+	    $ifp = @fopen($output_file, "wb");
+
+	    $data = explode(',', $base64_string);
+
+	    @fwrite($ifp, base64_decode($data[1]));
+	    @fclose($ifp);
+	    return $output_file;
+	}
+
+	function add_mark($inputfile, $outputfile) {
+
+	//    var_dump(gd_info());
+	    $im = @imagecreatefrompng($inputfile);
+
+	    $bg = @imagecolorallocate($im, 255, 255, 255);
+	    $textcolor = @imagecolorallocate($im, 110, 110, 110);
+
+	    list($x, $y, $type) = getimagesize($inputfile);
+
+	    $txtpos_x = $x - 145;
+	    $txtpos_y = 20;
+
+	    @imagestring($im, 3, $txtpos_x, $txtpos_y, date("Y-m-d H:i:s"), $textcolor);
+
+	    @imagepng($im, $outputfile);
+
+	    // Output the image
+	    //imagejpeg($im);
+
+	    @imagedestroy($im);
+
+	}
 
 }
 

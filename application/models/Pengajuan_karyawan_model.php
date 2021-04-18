@@ -16,13 +16,23 @@ class Pengajuan_karyawan_model extends CI_Model
     }
 
     // datatables
-    function json() {
+    function jsondepartement() {
         $this->datatables->select('pengajuan_karyawan.*,pengajuan_karyawan.id_form as owo, tbl_dept.*');
         $this->datatables->from('pengajuan_karyawan');
         //add this line for join
         $this->datatables->join('tbl_dept', 'tbl_dept.id_dept = pengajuan_karyawan.id_dept');
         $this->datatables->where('tbl_dept.id_dept',$this->session->userdata('id_dept'));
         $this->datatables->add_column('action', anchor(site_url('pengajuan_karyawan/read/$1'),'Read')." | ".anchor(site_url('pengajuan_karyawan/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'owo');
+        return $this->datatables->generate();
+    }
+
+    function jsonall() {
+        $this->datatables->select('id_form,tpk,id_dept,id_posisi,tgl_pengajuan,priority_id,status_pengajuan');
+        $this->datatables->from('pengajuan_karyawan');
+        //add this line for join
+        //$this->datatables->join('tbl_dept', 'tbl_dept.id_dept = pengajuan_karyawan.id_dept');
+        //$this->datatables->where('tbl_dept.id_dept',$this->session->userdata('id_dept'));
+        $this->datatables->add_column('action', anchor(site_url('pengajuan_karyawan/read/$1'),'Read')." | ".anchor(site_url('pengajuan_karyawan/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_form');
         return $this->datatables->generate();
     }
 
