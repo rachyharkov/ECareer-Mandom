@@ -8,6 +8,7 @@ class Pengajuan_karyawan extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        is_login();
         $this->load->model('Dept_model');
         $this->load->model('Posisi_model');
         $this->load->model('Tingkat_pendidikan_model');

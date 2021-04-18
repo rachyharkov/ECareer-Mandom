@@ -23,10 +23,10 @@
                 <div class="box box-warning box-solid">        
                     <div class="box-body">
                         <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-4">
-                <h2 style="margin-top:0px">LIST PENGAJUAN KARYAWAN</h2>
+            <div class="col-md-5">
+                <h2 style="margin-top:0px">LIST FPKB DEPARTEMEN <?php echo $this->fungsi->user_login()->nama_depart ?></h2>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-3 text-center">
                 <div style="margin-top: 4px"  id="message">
                     <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                 </div>

@@ -66,12 +66,16 @@
     	</td>
     </tr>
     <tr>
-    	<td>
-    		<a href="<?php echo site_url('pengajuan_karyawan') ?>" class="btn btn-primary">Approve</a>		
-    	
-    		<a href="<?php echo site_url('pengajuan_karyawan') ?>" class="btn btn-danger">Declined</a>		
-    	
-    		<a href="<?php echo site_url('pengajuan_karyawan') ?>" class="btn btn-default">Cancel</a>
+    	<td>		
+    	   <?php
+           if ($this->fungsi->user_login('id_dept') == '1' || $this->fungsi->user_login('id_dept') == '2') {
+               ?>
+                    <a href="<?php echo site_url('pengajuan_karyawan/approve') ?>" class="btn btn-primary">Approve</a>
+                    <a href="<?php echo site_url('pengajuan_karyawan/declined') ?>" class="btn btn-danger">Declined</a>		
+               <?php
+           }
+           ?>
+    		<a href="<?php echo site_url('pengajuan_karyawan') ?>" class="btn btn-default">Kembali</a>
     	</td>
     </tr>
 </table>
