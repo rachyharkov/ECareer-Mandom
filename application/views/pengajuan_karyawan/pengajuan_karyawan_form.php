@@ -20,16 +20,35 @@
                             </div>
                             <div class="form-group">
                                 <label for="varchar">Pilih Departemen anda <?php echo form_error('id_dept') ?></label>
-                                <select name="id_dept" id="id_dept" class="form-control">
-                                    <option value="">-- Pilih --</option>
-                                    <?php foreach ($deptlist as $o) { ?>
-                                        <?php if ($o->id_dept==$this->fungsi->user_login()->id_dept) { ?>
-                                            <option value="<?php echo $o->id_dept?>" selected><?php echo $o->nama_dept ?></option>    
-                                            <?php }else{ ?>
-                                            <option value="<?php echo $o->id_dept?>"><?php echo $o->nama_dept ?></option>      
+                                <?php
+                                if ($this->fungsi->user_login()->id_dept == '1' || $this->fungsi->user_login()->id_dept == '2') {
+                                    ?>
+                                    <select name="id_dept" id="id_dept" class="form-control">
+                                        <option value="">-- Pilih --</option>
+                                        <?php foreach ($deptlist as $o) { ?>
+                                            <?php if ($o->id_dept==$this->fungsi->user_login()->id_dept) { ?>
+                                                <option value="<?php echo $o->id_dept?>" selected><?php echo $o->nama_dept ?></option>    
+                                                <?php }else{ ?>
+                                                <option value="<?php echo $o->id_dept?>"><?php echo $o->nama_dept ?></option>      
+                                            <?php } ?>
                                         <?php } ?>
-                                    <?php } ?>
-                                </select>
+                                    </select>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <select name="id_dept" id="id_dept" class="form-control">
+                                        <option value="">-- Pilih --</option>
+                                        <?php foreach ($deptlist as $o) { ?>
+                                            <?php if ($o->id_dept==$this->fungsi->user_login()->id_dept) { ?>
+                                                <option value="<?php echo $o->id_dept?>" selected><?php echo $o->nama_dept ?></option>    
+                                                <?php }else{ ?>
+                                                <option value="<?php echo $o->id_dept?>" disabled><?php echo $o->nama_dept ?></option>      
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </select>
+                                    <?php
+                                }
+                                ?>
                             </div>
                             <div class="form-group">
                                 <label for="varchar">Tanggal Penempatan <?php echo form_error('tanggal_penempatan') ?></label>
@@ -171,7 +190,7 @@
                                                         <span for="varchar" style="font-weight: bold;">Karyawan Keluar/Diganti?</span>
                                                     </label>
                                                 </div>
-                                                <input type="text" class="form-control" name="karyawan_out" id="karyawan_out" placeholder="Karyawan Out" value="Tidak Ada" style="display: none;" />
+                                                <textarea rows="5" cols="50" type="text" class="form-control" name="karyawan_out" id="karyawan_out" placeholder="Karyawan Out" value="Tidak Ada" style="display: none;" ></textarea>
                                             </div>            
                                         </div>
                                     </div>

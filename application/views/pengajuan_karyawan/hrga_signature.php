@@ -1,12 +1,13 @@
 <div id="small-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-sm" role="document" style="margin-top: 7%;text-align: center;">
 		<div class="modal-content">
-			<form role="form" method="POST" action="<?php echo site_url('pengajuan_karyawan/owo') ?>" method="post" enctype="multipart/form-data">
+			<form role="form" method="POST" action="<?php echo site_url('pengajuan_karyawan/approve') ?>" enctype="multipart/form-data">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title" id="myModalLabel2">HR/GA Signature</h4>
 				</div>
 				<div class="modal-body">
+					<input hidden="hidden" type="text" name="idform" id="idform" value="<?php echo $id_form ?>">
 					<p style="float: left;">Beri tanda tangan :</p>
 					<button type="button" class="btn btn-danger" onclick="tandaTangan.clear()" style="float: right;">
 						<i class="fa fa-eraser fa-fw"></i>Hapus

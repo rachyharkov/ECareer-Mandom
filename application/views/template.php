@@ -71,7 +71,7 @@
       <div id="sidebar-nav" class="sidebar">
         <nav>
           <ul class="nav" id="sidebar-nav-menu">
-            <li class="menu-group">Main</li>
+            <li class="menu-group">Menu</li>
             <li><a href="<?= base_url() ?>dashboard"><i class="ti-home"></i> <span class="title">Dashboard</span></a></li>
             <li class="panel">
               <a href="#pengajuan" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-clipboard"></i> <span class="title">E-Career Manage</span> <i class="icon-submenu ti-angle-left"></i></a>
@@ -83,13 +83,14 @@
                 </ul>
               </div>
             </li>
+            <?php
+              if ($this->session->userdata("level") == 1) {
+            ?>
             <li class="panel">
               <a href="#pengaturan" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
               <div id="pengaturan" class="collapse">
                 <ul class="submenu">
-                  <?php
-                  if ($this->session->userdata("level") == 1) {
-                    ?>
+                  
                       <li><a href="<?= base_url() ?>user">Kelola User</a></li>
                       <li><a href="<?= base_url() ?>user_role">Kelola Level</a></li>
                       <li><a href="<?= base_url() ?>dept">Kelola Departement</a></li>
@@ -99,14 +100,15 @@
                       <li><a href="<?= base_url() ?>Keahlian">Kelola Keahlian</a></li>
                       <li><a href="<?= base_url() ?>Status_karyawan">Kelola Status Kerja</a></li>
                       <li><a href="<?= base_url() ?>Priority">Kelola Prioritas</a></li>
-                    <?php
-                  }
-                  ?>
+                    
                   <li><a href="<?= base_url() ?>backup">Backup Database</a></li>
                   <li><a href="<?= base_url() ?>History_karyawan">History Login</a></li>
                 </ul>
               </div>
             </li>
+            <?php
+              }
+            ?>
           </ul>
           <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
         </nav>
@@ -217,7 +219,6 @@ echo $tahun;
     <script src="<?= base_url() ?>admin/assets/vendor/pace/pace.min.js"></script>
     <script src="<?= base_url() ?>admin/assets/scripts/klorofilpro-common.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>admin/assets/js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>admin/assets/js/sweetalert.js"></script>
     <script src="<?php echo base_url();?>admin/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
     <script src="<?= base_url() ?>admin/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> <!-- untuk sweet alret -->
@@ -240,17 +241,67 @@ echo $tahun;
         $('.dropify').dropify();
 
         $("#kdganti").click(function () {
-        if ($("#kdganti").is(":checked")) {
-            $("#karyawan_out")
-                .css("display","unset")
-                .val('Nama Karyawan yang keluar');
-        }
-        else {
-            $("#karyawan_out")
-                .css("display","none")
-                .val('Tidak Ada');
-        }
-    });
+          if ($("#kdganti").is(":checked")) {
+              $("#karyawan_out")
+                  .css("display","unset")
+                  .val('Nama Karyawan yang keluar? (gunakan separator koma jika lebih dari satu) ');
+          }
+          else {
+              $("#karyawan_out")
+                  .css("display","none")
+                  .val('Tidak Ada');
+          }
+        });
+
+        $('#exporttoworddetailpengajuanbtn').on('click', function(){
+          var id_form = $('#id_formnyasatu').val();
+          Swal.fire({
+            title: '' + id_form + ' Berhasil di Export',
+            text :'Unduhan jalan pada tab browser baru.',
+            icon :'success',
+            showCancelButton: false,
+            showConfirmButton: true
+          });
+        });
+
+        $('#declinedbtn').on('click', function(){
+          (async () => {
+            const { value: text } = await Swal.fire(
+            {
+                title: 'Yakin ingin tolak pengajuan?',
+                text: "Masukan alasannya",
+                input: 'textarea',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#F9354C',
+                cancelButtonColor: '#41B314',
+                confirmButtonText: 'Submit'
+            })
+            if(text) {
+              var id_form = $('#id_formnya').val();
+              var status_pengajuan = "Ditolak";
+              $.ajax({
+                  type : "POST",
+                  url  : "<?php echo base_url('/pengajuan_karyawan/declined')?>",
+                  dataType : "JSON",
+                  data : {id_form:id_form,status_pengajuan:status_pengajuan,keterangan:text},
+                  success: function(data){
+                  }
+              });
+              Swal.fire(
+                '' + id_form + ' Ditolak',
+                'Departemen terkait akan menerima informasi penolakan yang diberikan.',
+                'success').then(function() {
+                  window.location.reload(true);// <--- submit for prmogrammatically
+                });
+            } else {
+              Swal.fire({
+                icon: 'error',
+                text: "Text kosong, tindakan dibatalkan"
+              });
+            }
+          })()
+        });
       })
     </script>
   </body>

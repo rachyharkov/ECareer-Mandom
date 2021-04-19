@@ -27,7 +27,7 @@ class Pengajuan_karyawan_model extends CI_Model
     }
 
     function jsonall() {
-        $this->datatables->select('id_form,tpk,id_dept,id_posisi,tgl_pengajuan,priority_id,status_pengajuan');
+        $this->datatables->select('id_form,tpk,id_dept,id_posisi,tanggal_pengajuan,priority_id,status_pengajuan');
         $this->datatables->from('pengajuan_karyawan');
         //add this line for join
         //$this->datatables->join('tbl_dept', 'tbl_dept.id_dept = pengajuan_karyawan.id_dept');
@@ -79,7 +79,8 @@ class Pengajuan_karyawan_model extends CI_Model
 	$this->db->or_like('dp_sot', $q);
 	$this->db->or_like('dp_jdesk', $q);
 	$this->db->or_like('catatan', $q);
-	$this->db->or_like('karyawan_out', $q);
+	$this->db->or_like('tanggal_pengajuan', $q);
+    $this->db->or_like('last_update', $q);
 	$this->db->or_like('tgl_pengajuan', $q);
 	$this->db->or_like('diajukanoleh', $q);
 	$this->db->or_like('priority_id', $q);
@@ -109,7 +110,8 @@ class Pengajuan_karyawan_model extends CI_Model
 	$this->db->or_like('dp_jdesk', $q);
 	$this->db->or_like('catatan', $q);
 	$this->db->or_like('karyawan_out', $q);
-	$this->db->or_like('tgl_pengajuan', $q);
+	$this->db->or_like('tanggal_pengajuan', $q);
+    $this->db->or_like('last_update', $q);
 	$this->db->or_like('diajukanoleh', $q);
 	$this->db->or_like('priority_id', $q);
 	$this->db->limit($limit, $start);

@@ -24,7 +24,7 @@
                     <div class="box-body">
                         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-5">
-                <h2 style="margin-top:0px">LIST FPKB DEPARTEMEN <?php echo $this->fungsi->user_login()->nama_depart ?></h2>
+                <h2 style="margin-top:0px">LIST FPKB DEPARTEMEN <?php if($this->fungsi->user_login()->id_dept == 1 || $this->fungsi->user_login()->id_dept == 2){ echo " "; }else{ echo $this->fungsi->user_login()->nama_depart;}?></h2>
             </div>
             <div class="col-md-3 text-center">
                 <div style="margin-top: 4px"  id="message">
@@ -42,7 +42,7 @@
                 <tr>
                     <th>No</th>
                     <th>ID Form Pengajuan</th>
-                    <th>Tpk</th>
+                    <th>TPK</th>
                     <th>Departemen</th>
                     <th>Posisi</th>
                     <th>Tgl Pengajuan</th>
@@ -92,7 +92,7 @@
                         {
                             "data": "id_form",
                             "orderable": false
-                        },{"data": "id_form"},{"data": "tpk"},{"data": "id_dept"},{"data": "id_posisi"},{"data": "tgl_pengajuan"},{"data": "priority_id"},{"data": "status_pengajuan", render: function(data){if (data == "Pending") {return '<span class="label label-warning">'+ data +'</span>'} else if (data == "Ditolak") {return '<span class="label label-danger">' + data + '</span>'} else {return '<span class="label label-success">'+ data +'</span>'}}},
+                        },{"data": "id_form"},{"data": "tpk"},{"data": "id_dept"},{"data": "id_posisi"},{"data": "tanggal_pengajuan"},{"data": "priority_id"},{"data": "status_pengajuan", render: function(data){if (data == "Pending") {return '<span class="label label-warning">'+ data +'</span>'} else if (data == "Ditolak") {return '<span class="label label-danger">' + data + '</span>'} else {return '<span class="label label-success">'+ data +'</span>'}}},
                         {
                             "data" : "action",
                             "orderable": false,

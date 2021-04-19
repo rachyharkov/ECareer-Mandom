@@ -1,22 +1,3 @@
-<div class="content-wrapper">
-    <section class="content">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box box-warning box-solid">
-    
-                    <div class="box-header">
-                        <h3 class="box-title">KELOLA POSISI</h3>
-                    </div>        
-                    <div class="box-body">
-                        <div class='row'>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-<!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
@@ -34,35 +15,45 @@
         </style>
     </head>
     <body>
-        <h2>Pengajuan_karyawan List</h2>
-        <table class="word-table" style="margin-bottom: 10px">
-            <tr>
-                <th>No</th>
-                <th>ID Form Pengajuan</th>
-				<th>Tpk</th>
-				<th>Departemen</th>
-				<th>Posisi</th>
-				<th>Tgl Pengajuan</th>
-				<th>Diajukanoleh</th>
-				<th>Prioritas</th>
-		
-            </tr><?php
-            foreach ($pengajuan_karyawan_data as $pengajuan_karyawan)
-            {
-                ?>
-            <tr>
-		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $pengajuan_karyawan->id_form ?></td>
-		      <td><?php echo $pengajuan_karyawan->tpk ?></td>
-		      <td><?php echo $pengajuan_karyawan->id_dept ?></td>
-		      <td><?php echo $pengajuan_karyawan->id_posisi ?></td>
-		      <td><?php echo $pengajuan_karyawan->tgl_pengajuan ?></td>
-		      <td><?php echo $pengajuan_karyawan->diajukanoleh ?></td>
-		      <td><?php echo $pengajuan_karyawan->priority_id ?></td>	
-                </tr>
-                <?php
-            }
-            ?>
-        </table>
+        <div style="border: 5px double #020103; margin: 10px; padding: 13px; width: 45%;">
+            <div>
+                <table class="word-table" style="margin-bottom: 10px">
+                  <tr>
+                    <td colspan="2" rowspan="4" style="text-align: center;"><img src="<?php echo base_url()."assets/img/logomandom.png" ?>" width="90"></td>
+                    <td align="center" rowspan="4" style="width: 47%;"><h5>FORMULIR</h5><h5>PERMINTAAN KARYAWAN BARU</h5></td>
+                    <td colspan="4" style="font-size: 10px; padding: 0;">Form No &emsp;&nbsp;&nbsp;: <?php echo $id_form; ?></td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" style="font-size: 10px; padding: 0;">Tgl Berlaku &nbsp;:</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" style="font-size: 10px; padding: 0;">No. Revisi &nbsp;&nbsp;:</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" style="font-size: 10px; padding: 0;">Halaman &nbsp;&nbsp;&nbsp;&nbsp;:</td>
+                  </tr>
+                </table>
+            </div>
+            <div>
+                <table style="font-size: 12px; border: 0px; width: 100%; margin: auto;">
+                    <tr>
+                        <td style="width: 48%;"><ul style="margin-left: 3vh; padding: 0;"><li style="list-style-type: circle;">Tujuan Permintaan Karyawan</li></ul></td>
+                        <td><ul style="margin: 0; padding: 0;"><li style="list-style-type: none;"><div style="display: flex; flex-direction: row;">:&nbsp;<div style="height: 15px; width: 22px; border: 1px solid black;">v</div><p>&nbsp;Penambahan</p>&emsp;&emsp;<div style="height: 15px; width: 22px;border: 1px solid black;">v</div><p>&nbsp;Penambahan</p></div></li></ul></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 48%;"><ul style="margin-left: 3vh; padding: 0;"><li style="list-style-type: circle;">Bagian/Departemen</li></ul></td>
+                        <td><ul style="margin: 0; padding: 0;"><li style="list-style-type: none;">: ________________</li></ul></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 48%;"><ul style="margin-left: 3vh; padding: 0;"><li style="list-style-type: circle;">Rencana Penempatan (tanggal)</li></ul></td>
+                        <td><ul style="margin: 0; padding: 0;"><li style="list-style-type: none;">: ________________</li></ul></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 48%;"><ul style="margin-left: 3vh; padding: 0;"><li style="list-style-type: circle;">Kualifikasi yang dibutuhkan sebagai berikut</li></ul></td>
+                        <td><ul style="margin: 0; padding: 0;"><li style="list-style-type: none;">:</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </body>
 </html>

@@ -8,7 +8,6 @@ class Pengajuan_karyawan extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        is_login();
         $this->load->model('Dept_model');
         $this->load->model('Posisi_model');
         $this->load->model('Tingkat_pendidikan_model');
@@ -61,7 +60,8 @@ class Pengajuan_karyawan extends CI_Controller
 				'dp_jdesk' => $row->dp_jdesk,
 				'catatan' => $row->catatan,
 				'karyawan_out' => $row->karyawan_out,
-				'tgl_pengajuan' => $row->tgl_pengajuan,
+				'last_update' => $row->last_update,
+				'tanggal_pengajuan' => $row->tanggal_pengajuan,
 				'diajukanoleh' => $row->diajukanoleh,
 				'priority_id' => $row->prioritas,
 				'status_pengajuan' => $row->status_pengajuan,
@@ -81,6 +81,46 @@ class Pengajuan_karyawan extends CI_Controller
         		$this->session->set_flashdata('message', 'You dont have access to that data!');
             	redirect(site_url('pengajuan_karyawan'));	
         	}
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('pengajuan_karyawan'));
+        }
+    }
+
+    public function readforword($id) 
+    {
+        $row = $this->Pengajuan_karyawan_model->get_by_id($id);
+        if ($row) {
+            $data = array(
+				'id_form' => $row->id_form,
+				'tpk' => $row->tpk,
+				'id_dept' => $row->nama_dept,
+				'tanggal_penempatan' => $row->tanggal_penempatan,
+				'jks' => $row->jks,
+				'id_posisi' => $row->nama_posisi,
+				'jenis_kelamin' => $row->jenis_kelamin,
+				'batas_usia' => $row->batas_usia,
+				'id_tingkat_pendidikan' => $row->tingkat_pendidikan,
+				'id_jurusfakult' => $row->fakultas,
+				'sp_keahlian' => $row->sp_keahlian,
+				'pengalaman_kerja' => $row->pengalaman_kerja,
+				'id_sk' => $row->nama_status_karyawan,
+				'estimasi_gaji' => $row->estimasi_gaji,
+				'lptj' => $row->lptj,
+				'dp_sot' => $row->dp_sot,
+				'dp_jdesk' => $row->dp_jdesk,
+				'catatan' => $row->catatan,
+				'karyawan_out' => $row->karyawan_out,
+				'last_update' => $row->last_update,
+				'tanggal_pengajuan' => $row->tanggal_pengajuan,
+				'diajukanoleh' => $row->diajukanoleh,
+				'priority_id' => $row->prioritas,
+				'status_pengajuan' => $row->status_pengajuan,
+				'keterangan' => $row->keterangan,
+				'tandatanganhrga' => $row->tandatanganhrga,
+				'tandatangandirektur' => $row->tandatangandirektur
+		    );
+    		$this->load->view('pengajuan_karyawan/pengajuan_karyawan_doc',$data);	
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('pengajuan_karyawan'));
@@ -119,7 +159,8 @@ class Pengajuan_karyawan extends CI_Controller
 		    'dp_jdesk' => set_value('dp_jdesk'),
 		    'catatan' => set_value('catatan'),
 		    'karyawan_out' => set_value('karyawan_out'),
-		    'tgl_pengajuan' => set_value('tgl_pengajuan'),
+		    'last_update' => set_value('last_update'),
+		    'tanggal_pengajuan' => set_value('tanggal_pengajuan'),
 		    'diajukanoleh' => set_value('diajukanoleh'),
 		    'priority_id' => set_value('priority_id'),
 		    'deptlist' =>$deptlist,
@@ -191,6 +232,7 @@ class Pengajuan_karyawan extends CI_Controller
 				'lptj' => $this->input->post('lptj',TRUE),
 				'dp_sot' => $file1.$filename1,
 				'dp_jdesk' => $file2.$filename2,
+				'tanggal_pengajuan' => date("Y/m/d H:i:s-"),
 				'catatan' => $this->input->post('catatan',TRUE),
 				'karyawan_out' => $this->input->post('karyawan_out'),
 				'diajukanoleh' => $this->fungsi->user_login()->name,
@@ -269,7 +311,7 @@ class Pengajuan_karyawan extends CI_Controller
 				'dp_jdesk' => $this->input->post('dp_jdesk',TRUE),
 				'catatan' => $this->input->post('catatan',TRUE),
 				'karyawan_out' => $this->input->post('karyawan_out',TRUE),
-				'tgl_pengajuan' => $this->input->post('tgl_pengajuan',TRUE),
+				'last_update' => $this->input->post('last_update',TRUE),
 				'diajukanoleh' => $this->input->post('diajukanoleh',TRUE),
 				'priority_id' => $this->input->post('priority_id',TRUE),
 		    );
@@ -391,7 +433,7 @@ class Pengajuan_karyawan extends CI_Controller
 	    xlsWriteLabel($tablebody, $kolombody++, $data->dp_jdesk);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->catatan);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->karyawan_out);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->tgl_pengajuan);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->last_update);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->diajukanoleh);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->priority_id);
 
@@ -416,6 +458,49 @@ class Pengajuan_karyawan extends CI_Controller
         $this->load->view('pengajuan_karyawan/pengajuan_karyawan_doc',$data);
     }
 
+    public function export_detailpengajuan_toword()
+    {
+
+        /*header("Content-type: application/vnd.ms-word");
+        header("Content-Disposition: attachment;Filename=pengajuan_karyawan.doc");*/
+        $row = $this->Pengajuan_karyawan_model->get_by_id($this->input->post('id_formnyasatu', TRUE));
+        if ($row) {
+            $data = array(
+				'id_form' => $row->id_form,
+				'tpk' => $row->tpk,
+				'id_dept' => $row->nama_dept,
+				'tanggal_penempatan' => $row->tanggal_penempatan,
+				'jks' => $row->jks,
+				'id_posisi' => $row->nama_posisi,
+				'jenis_kelamin' => $row->jenis_kelamin,
+				'batas_usia' => $row->batas_usia,
+				'id_tingkat_pendidikan' => $row->tingkat_pendidikan,
+				'id_jurusfakult' => $row->fakultas,
+				'sp_keahlian' => $row->sp_keahlian,
+				'pengalaman_kerja' => $row->pengalaman_kerja,
+				'id_sk' => $row->nama_status_karyawan,
+				'estimasi_gaji' => $row->estimasi_gaji,
+				'lptj' => $row->lptj,
+				'dp_sot' => $row->dp_sot,
+				'dp_jdesk' => $row->dp_jdesk,
+				'catatan' => $row->catatan,
+				'karyawan_out' => $row->karyawan_out,
+				'last_update' => $row->last_update,
+				'tanggal_pengajuan' => $row->tanggal_pengajuan,
+				'diajukanoleh' => $row->diajukanoleh,
+				'priority_id' => $row->prioritas,
+				'status_pengajuan' => $row->status_pengajuan,
+				'keterangan' => $row->keterangan,
+				'tandatanganhrga' => $row->tandatanganhrga,
+				'tandatangandirektur' => $row->tandatangandirektur
+		    );
+    		$this->load->view('pengajuan_karyawan/pengajuan_karyawan_doc',$data);	
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('pengajuan_karyawan'));
+        }
+    }
+
     public function approve()
     {
 		$output_file = "lampiran/signature" . date("Y-m-d-H-i-s-").time(). ".png";
@@ -424,23 +509,47 @@ class Pengajuan_karyawan extends CI_Controller
 			'status_pengajuan'			=> 'Diterima'
 	    );
 	    $signaturehrga = array(
-			'tandatangandirektur' => $output_file
+			'tandatanganhrga' => $output_file
 	    );
     	if ($this->fungsi->user_login()->id_dept == '1') {
-            $this->Pengajuan_karyawan_model->update($this->input->post('idform', TRUE), $signaturedirektur);
-            $this->session->set_flashdata('oke', 'Persetujuan oleh HR/GA telah dilakukan');
-			$this->base64_to_jpeg($_POST["image"], $output_file);
-			$this->add_mark($output_file, $output_file);
-            redirect(site_url('pengajuan_karyawan'));
-    	}
-
-    	if ($this->fungsi->user_login()->id_dept == '2') {
             $this->Pengajuan_karyawan_model->update($this->input->post('idform', TRUE), $signaturedirektur);
             $this->session->set_flashdata('oke', 'Persetujuan oleh Direktur telah dilakukan');
 			$this->base64_to_jpeg($_POST["image"], $output_file);
 			$this->add_mark($output_file, $output_file);
             redirect(site_url('pengajuan_karyawan'));
     	}
+
+    	if ($this->fungsi->user_login()->id_dept == '2') {
+            $this->Pengajuan_karyawan_model->update($this->input->post('idform', TRUE), $signaturehrga);
+            $this->session->set_flashdata('oke', 'Persetujuan oleh HR/GA telah dilakukan');
+			$this->base64_to_jpeg($_POST["image"], $output_file);
+			$this->add_mark($output_file, $output_file);
+            redirect(site_url('pengajuan_karyawan'));
+    	}
+    }
+
+    public function declined()
+    {
+    	if ($this->fungsi->user_login()->id_dept == '1') {
+	 		$data = array(
+	 			'status_pengajuan' => 'Ditolak',
+	 			'keterangan' => $this->input->post('keterangan', TRUE)." (Direktur)",
+	 			'tandatangandirektur' => 'Ditolak'
+	 		);
+    	} else {
+    		$data = array(
+	 			'status_pengajuan' => 'Ditolak',
+	 			'keterangan' => $this->input->post('keterangan', TRUE)." (HR/GA)",
+	 			'tandatangandirektur' => 'Ditolak',
+	 			'tandatanganhrga' => 'Ditolak'
+	 		);
+    	}
+ 		$this->Pengajuan_karyawan_model->update($this->input->post('id_form', TRUE), $data);
+		/*$row = $this->Pengajuan_karyawan_model->get_by_id($this->input->post('id_form', TRUE));
+        if ($row) {
+ 			unlink($row->tandatangandirektur);
+        	unlink($row->tandatanganhrga);
+        }*/
     }
 
     //this is for fetching image using php puprose
