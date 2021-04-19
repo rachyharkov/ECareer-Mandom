@@ -182,7 +182,7 @@ if ($status_pengajuan == "Pending") {
     		<a href="<?php echo site_url('pengajuan_karyawan') ?>" class="btn btn-default">Kembali</a>
             <form action="<?php echo base_url()."pengajuan_karyawan/export_detailpengajuan_toword"; ?>" role="form" method="post" enctype="multipart/form-data" autocomplete="off" style="float: right;">
                 <input type="hidden" name="id_formnyasatu" id="id_formnyasatu" value="<?php echo $id_form ?>">   
-                <button class="btn btn-primary" id="exporttoworddetailpengajuanbtn" formtarget="_blank"><i class='fa fa-file-word-o'></i> Word</button>
+                <button class="btn btn-primary" id="exporttoworddetailpengajuanbtn" formtarget="_blank"><i class='fa fa-file-word-o'></i> Print</button>
             </form>
     	</td>
     </tr>

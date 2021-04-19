@@ -461,8 +461,10 @@ class Pengajuan_karyawan extends CI_Controller
     public function export_detailpengajuan_toword()
     {
 
-        /*header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=pengajuan_karyawan.doc");*/
+        //header("Content-type: application/vnd.ms-word");
+        //header("Expires: 0"); 
+		//header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
+        //header("Content-Disposition: attachment;Filename=pengajuan_karyawan.doc");
         $row = $this->Pengajuan_karyawan_model->get_by_id($this->input->post('id_formnyasatu', TRUE));
         if ($row) {
             $data = array(
