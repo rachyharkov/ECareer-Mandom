@@ -1,0 +1,270 @@
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 12px;
+}
+.onenavbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px;
+  padding-right: 254px;
+  background-color: white;
+  width: 100%;
+  height: 98px;
+  z-index: 999;
+  padding: 0 200px;
+}
+
+.icon {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.iconify {
+  margin-left: 20px;
+  size: 20px;
+  height: auto;
+  width: 30px;
+}
+
+
+.daftar ul {
+    background-color: #00b5ad;
+    display: flex; 
+    font-size: 15px;
+    width: 100%;
+    margin: 0px;
+    padding-left: 202px;
+}
+
+.daftar li {
+    margin-left: 0px;
+    list-style-type: none;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .daftar a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .wrapper-main {
+    margin-top: 40px;
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+div.alert, p.notice, p.alert {
+  padding: 15px;
+  border: 1px solid transparent;
+}
+
+.alert-danger-custom {
+  background-color: #FFE3E5;
+  color: #CB0000;
+  border-left: thick solid #CB0000 !important;
+}
+
+.accor {
+  padding-top: 0px;
+  padding-left: 256px;
+  padding-right: 256px;
+}
+
+.info h4 {
+  padding-top: 41px;
+}
+
+.footer {
+  padding: 10px;
+  padding-top: 72px;
+  color: blueviolet;
+}
+
+.section-copyright {
+  text-align: center;
+}
+
+.footer-penutup {
+  background-color: #00b5ad;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap; 
+  text-align: center;
+  padding-right: 462px;
+  margin: 20px;
+}
+
+.footer-penutup a {
+  margin: 20px;
+  text-align: center;
+  color: white;
+}
+
+.mandom-footer {
+  background-color: #00b5ad;
+  color: #ffffff;
+  padding-bottom: 50px;
+}
+
+.mandom-menu {
+  display: flex;
+}
+
+.menu-separator {
+  padding: 0 20px;
+}
+
+.span {
+  padding-top: 25px;
+  text-align: center;
+}
+
+.span a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.section-socmed {
+  text-align: center;
+  padding-top: 19px;
+}
+
+.section-copyright {
+  padding-top: 12px;
+}
+
+/*------style position ----------*/
+
+.icon {
+  padding: 20px;
+  padding-right: 0px;
+  padding-top: 25px;
+  padding-bottom: 29px;
+}
+
+.iconify {
+  margin: 0px;
+  size: 20px;
+  max-width: 100%;
+  height: auto;
+  width: 30px;
+}
+
+
+.daftar ul {
+  background-color: #00b5ad;
+  display: flex; 
+  font-size: 15px;
+  width: 100%;
+  margin: 0px;
+  padding-left: 202px;
+}
+
+.daftar li {
+  margin-left: 0px;
+  list-style-type: none;
+  padding: 10px;
+  margin: 10px;
+}
+
+.daftar a {
+  color: white;
+  text-decoration: none;
+}
+
+.Posisi p{
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin: 0 0 10px;
+}
+
+.section {
+    background-color: #0f42eb;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px;
+    margin: 0 -10px;
+    padding-left: 266px;
+}
+
+
+.CAREER {
+  margin-top: 40px;
+  padding-bottom: 40px;
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.position-lamar {
+  padding-bottom: 10vh;
+  padding-left: 257px;
+}
+
+/*------style form-daftar ----------*/
+
+.pendaftaran {
+  padding: 250px;
+  background-color: aqua;
+}
+
+/*------Daftar Menu----------*/
+.jarak {
+  padding-top: 51px;
+  padding-bottom: 51px;
+}
+.daftar-menu {
+  background-color: rgba(55, 209, 201, 0.911);
+  text-align: center;
+  padding: 10px;
+}
+
+.menu a {
+  color: #ffffff;
+  text-decoration: rgb(7, 5, 6);
+  margin: 10px;
+}
+
+.table-joblist > thead > tr > th
+{
+  border: 0;
+  background-color: #00b5aa;
+  border-right: 1px solid #fff;
+  color: #ffffff;
+  font-weight: 400;
+  text-align: center;
+  font-size: 11pt;
+}
+
+.table-joblist > thead > tr > th:first-child
+{
+  border-top-left-radius: 5px !important;
+}
+
+.table-joblist > thead > tr > th:last-child
+{
+  border-top-right-radius: 5px !important;
+}
+
+/*------Responsive----------*/
+
+@media only screen and (max-width: 600px) {
+  .onenavbar {
+    padding: 0 5px;
+  }
+} 

@@ -189,6 +189,22 @@ class Pengajuan_karyawan_model extends CI_Model
         return $nextId;
     }
 
+    function GenerateIdcareerpost() {
+        $query = $this->db->select('id_careerposts')
+                          ->limit(1)
+                          ->order_by('id_careerposts','DESC')
+                          ->get('career_posts');
+        $row = $query->last_row();
+        if($row){
+            $idPostfix = (int)substr($row->id_careerposts,15)+1;
+            $nextId = 'CP-LK-'.date('dmY').'-'.STR_PAD((string)$idPostfix,5,"0",STR_PAD_LEFT);
+        }
+        else{
+            $nextId = 'CP-LK-'.date('dmY').'-00001';
+        } // For the first time
+        return $nextId;
+    }
+
 }
 
 /* End of file Pengajuan_karyawan_model.php */

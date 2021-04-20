@@ -102,7 +102,14 @@
                     </tr>
                     <tr>
                         <td>LINGKUP PEKERJAAN/TANGGUNG JAWAB</td>
-                        <td><?php echo $lptj ?></td>
+                        <td><div style="display: flex; flex-direction: row; width: 100%;">
+                            <div>
+                                :&nbsp;
+                            </div>
+                            <div>
+                                <?php echo $lptj ?> adsasdoadkowk  
+                            </div>
+                        </div></td>
                     </tr>
                     <tr>
                         <td style="padding: 0 5px 50px 7px;">DOKUMEN PENDUKUNG</td>
@@ -111,10 +118,10 @@
                                 <p>LAMPIRAN :</p>
                             </div>
                             <div>
-                                <div style="display: flex; flex-direction: row;"><div style="height: 16px; width: 22px; border: 1px solid black;"><?php if ($dp_sot != "NA") {
+                                <div style="display: flex; flex-direction: row;"><div style="height: 16px; width: 22px; border: 1px solid black;"><?php if ($dp_sot != "NULLNULL") {
                             echo "v";
                         } ?></div><p>&nbsp;Struktur Organisasi Terbaru</p></div><br>
-                                <div style="display: flex; flex-direction: row;"><div style="height: 16px; width: 22px; border: 1px solid black;"><?php if ($dp_jdesk != "NA") {
+                                <div style="display: flex; flex-direction: row;"><div style="height: 16px; width: 22px; border: 1px solid black;"><?php if ($dp_jdesk != "NULLNULL") {
                             echo "v";
                         } ?></div><p>&nbsp;Job description</p></div>
                             </div>
@@ -122,11 +129,25 @@
                     </tr>
                     <tr>
                         <td style="padding: 5px 5px 50px 7px;">CATATAN/KETERANGAN</td>
-                        <td style="height: auto;padding: 0px 5px 50px 7px;"><?php echo $keterangan ?></td>
+                        <td style="height: auto;padding: 0px 5px 50px 7px;"><div style="display: flex; flex-direction: row; width: 100%;">
+                            <div>
+                                :&nbsp;
+                            </div>
+                            <div>
+                                <?php echo $keterangan ?>  
+                            </div>
+                        </div></td>
                     </tr>
                     <tr>
                         <td style="padding: 5px 5px 50px 7px;">(*) NAMA KARYAWAN YANG DIGANTIKAN (KARYAWAN YANG KELUAR)</td>
-                        <td style="height: auto;padding: 0px 5px 50px 7px;">: <?php echo $karyawan_out ?></td>
+                        <td style="height: auto;padding: 0px 5px 50px 7px;"><div style="display: flex; flex-direction: row; width: 100%;">
+                            <div>
+                                :&nbsp;
+                            </div>
+                            <div>
+                                <?php echo $karyawan_out ?>
+                            </div>
+                        </div></td>
                     </tr>
                 </table>
             </div>

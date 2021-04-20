@@ -208,7 +208,8 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                            <input type="hidden" name="id_form" value="<?php echo $id_form; ?>" /> 
+                            <input type="hidden" name="id_form" value="<?php echo $id_form; ?>" />
+                            <input type="hidden" name="id_careerposts" value="<?php echo $id_careerposts; ?>" /> 
                             <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
                             <a href="<?php echo site_url('pengajuan_karyawan') ?>" class="btn btn-default">Cancel</a>
                         </form>

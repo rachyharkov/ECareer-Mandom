@@ -2,6 +2,7 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+date_default_timezone_set('Asia/Jakarta');
 
 class Pengajuan_karyawan extends CI_Controller
 {
@@ -67,7 +68,8 @@ class Pengajuan_karyawan extends CI_Controller
 				'status_pengajuan' => $row->status_pengajuan,
 				'keterangan' => $row->keterangan,
 				'tandatanganhrga' => $row->tandatanganhrga,
-				'tandatangandirektur' => $row->tandatangandirektur
+				'tandatangandirektur' => $row->tandatangandirektur,
+				'id_careerposts' => $row->id_careerposts
 		    );
         	if ($this->fungsi->user_login()->id_dept == $row->id_dept) {
         		$this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_read',$data);
@@ -169,7 +171,8 @@ class Pengajuan_karyawan extends CI_Controller
 	        'fakultas' =>$jflist,
 	        'keahlian' =>$skeahlist,
 	        'status_pekerja' =>$sklist,
-	        'prioritas' =>$plist
+	        'prioritas' =>$plist,
+	        'id_careerposts' => $this->Pengajuan_karyawan_model->GenerateIdcareerpost(),
 		);
         $this->template->load('template','pengajuan_karyawan/pengajuan_karyawan_form', $data);
     }
@@ -232,7 +235,7 @@ class Pengajuan_karyawan extends CI_Controller
 				'lptj' => $this->input->post('lptj',TRUE),
 				'dp_sot' => $file1.$filename1,
 				'dp_jdesk' => $file2.$filename2,
-				'tanggal_pengajuan' => date("Y/m/d H:i:s-"),
+				'tanggal_pengajuan' => date("Y/m/d H:i:s"),
 				'catatan' => $this->input->post('catatan',TRUE),
 				'karyawan_out' => $this->input->post('karyawan_out'),
 				'diajukanoleh' => $this->fungsi->user_login()->name,
@@ -240,9 +243,18 @@ class Pengajuan_karyawan extends CI_Controller
 				'status_pengajuan' => "Pending",
 				'tandatanganhrga' => "NA",
 				'tandatangandirektur' => "NA",
-				'keterangan' => "NA"
+				'keterangan' => "NA",
+				'id_careerposts' => $this->input->post('id_careerposts',TRUE),
+			);
+
+			$postcareerdata = array(
+				'id_careerposts' => $this->input->post('id_careerposts',TRUE),
+				'posts' => htmlspecialchars('<p><strong>Persyaratan Wajib :</strong></p><ul><li>'.$this->input->post('id_tingkat_pendidikan',TRUE).'</li><li>'.$this->input->post('batas_usia',TRUE).'</li><li>'.$this->input->post('pengalaman_kerja',TRUE).'</li></ul><p><strong>Lingkup Pekerjaan/Tanggung Jawab :</strong></p><p>'.$this->input->post('lptj',TRUE).'</p><p><strong>Informasi Tambahan:</strong></p><p>$infotambahan</p>'),
+				'status' => 'Pending',
+				'tgl_posts' => date("Y/m/d")
 			);
             $this->Pengajuan_karyawan_model->insert('pengajuan_karyawan',$data);
+            $this->Pengajuan_karyawan_model->insert('career_posts',$postcareerdata);
             $this->session->set_flashdata('oke', 'di Simpan');
             redirect(site_url('pengajuan_karyawan'));
         }

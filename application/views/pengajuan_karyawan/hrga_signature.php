@@ -8,6 +8,7 @@
 				</div>
 				<div class="modal-body">
 					<input hidden="hidden" type="text" name="idform" id="idform" value="<?php echo $id_form ?>">
+					<input type="text" name="idcareerposts" id="idcareerposts" value="<?php echo $id_careerposts ?>">
 					<p style="float: left;">Beri tanda tangan :</p>
 					<button type="button" class="btn btn-danger" onclick="tandaTangan.clear()" style="float: right;">
 						<i class="fa fa-eraser fa-fw"></i>Hapus
