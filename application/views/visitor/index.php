@@ -57,9 +57,9 @@
         </thead>
         <?php foreach ($info as $v) {
         ?>
-        <tr>
+        <tr id="careerid<?php echo $v->id ?>">
           <td><?php $timeex = strtotime($v->tgl_posts);
-          $newformatex = date('Y-m-d',$timeex);
+          $newformatex = date('d-m-Y',$timeex);
           echo $newformatex?></td>
           <td><?php echo $v->nama_posisi; ?></td>
           <td><?php $time = strtotime($v->tanggal_penempatan);

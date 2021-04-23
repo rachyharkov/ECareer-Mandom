@@ -251,6 +251,17 @@ div.alert, p.notice, p.alert {
   font-size: 11pt;
 }
 
+.table-joblist > tbody > tr:hover
+{
+  cursor: pointer;
+}
+
+.table-joblist > tbody > tr:hover
+{
+  background-color: #e8e8e8;
+  transition: all 200ms ease-in-out; 
+}
+
 .table-joblist > thead > tr > th:first-child
 {
   border-top-left-radius: 5px !important;
@@ -259,6 +270,11 @@ div.alert, p.notice, p.alert {
 .table-joblist > thead > tr > th:last-child
 {
   border-top-right-radius: 5px !important;
+}
+
+.navbar-nav li
+{
+  padding: 0 15px;
 }
 
 /*------Responsive----------*/
