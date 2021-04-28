@@ -65,6 +65,11 @@ class Career_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function insert($table,$data)
+    {
+        $this->db->insert($table, $data);
+    }
+
 }
 
 /* End of file Fakultas_model.php */

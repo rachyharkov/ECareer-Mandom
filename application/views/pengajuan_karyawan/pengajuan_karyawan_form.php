@@ -36,7 +36,7 @@
                                     <?php
                                 } else {
                                     ?>
-                                    <select name="id_dept" id="id_dept" class="form-control">
+                                    <select name="id_dept" id="id_dept" class="form-control" disabled="disabled">
                                         <option value="">-- Pilih --</option>
                                         <?php foreach ($deptlist as $o) { ?>
                                             <?php if ($o->id_dept==$this->fungsi->user_login()->id_dept) { ?>

@@ -79,7 +79,13 @@
                 <ul class="submenu">
                   <li><a href="<?= base_url() ?>pengajuan_karyawan/create">Tambah Pengajuan</a></li>
                   <li><a href="<?= base_url() ?>pengajuan_karyawan">List Pengajuan <span class="badge badge-warning"><?= ucfirst($this->fungsi->count_pending()) ?></span></a></li>
-                  <li><a href="<?= base_url() ?>ecareer_posted">Kelola Lowongan</a></li>
+                  <?php
+                    if ($this->fungsi->user_login()->id_dept == 2) {
+                      ?>
+                      <li><a href="<?= base_url() ?>ecareer_posted">Kelola Lowongan</a></li>
+                      <?php
+                    }
+                  ?>
                 </ul>
               </div>
             </li>
