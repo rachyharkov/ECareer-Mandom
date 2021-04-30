@@ -14,6 +14,7 @@ class Pengajuan_karyawan extends CI_Controller
         $this->load->model('Tingkat_pendidikan_model');
         $this->load->model('Fakultas_model');
         $this->load->model('Status_karyawan_model');
+        $this->load->model('Career_posts_model');
         $this->load->model('Keahlian_model');
         $this->load->model('Priority_model');
         $this->load->model('Pengajuan_karyawan_model');
@@ -249,9 +250,11 @@ class Pengajuan_karyawan extends CI_Controller
 
 			$postcareerdata = array(
 				'id_careerposts' => $this->input->post('id_careerposts',TRUE),
-				'posts' => htmlspecialchars('<p><strong>Persyaratan Wajib :</strong></p><ul><li>'.$this->input->post('id_tingkat_pendidikan',TRUE).'</li><li>'.$this->input->post('batas_usia',TRUE).'</li><li>'.$this->input->post('pengalaman_kerja',TRUE).'</li></ul><p><strong>Lingkup Pekerjaan/Tanggung Jawab :</strong></p><p>'.$this->input->post('lptj',TRUE).'</p><p><strong>Informasi Tambahan:</strong></p><p>$infotambahan</p>'),
+				'posts' => 'Tidak ada',
 				'status' => 'Pending',
-				'tgl_posts' => date("Y/m/d")
+				'tgl_posts' => date("Y/m/d"),
+				'tipe_pekerjaan' => 'Full Time',
+				'lokasi' => 'Bekasi'
 			);
             $this->Pengajuan_karyawan_model->insert('pengajuan_karyawan',$data);
             $this->Pengajuan_karyawan_model->insert('career_posts',$postcareerdata);
@@ -522,11 +525,17 @@ class Pengajuan_karyawan extends CI_Controller
 			'tandatangandirektur' 		=> $output_file,
 			'status_pengajuan'			=> 'Diterima'
 	    );
+
+	    $updatePostsStatus = array(
+			'status' 		=> "Posted",
+	    );
+
 	    $signaturehrga = array(
 			'tandatanganhrga' => $output_file
 	    );
     	if ($this->fungsi->user_login()->id_dept == '1') {
             $this->Pengajuan_karyawan_model->update($this->input->post('idform', TRUE), $signaturedirektur);
+            $this->Career_posts_model->updatestatuspost($this->input->post('idcareerposts', TRUE), $updatePostsStatus);
             $this->session->set_flashdata('oke', 'Persetujuan oleh Direktur telah dilakukan');
 			$this->base64_to_jpeg($_POST["image"], $output_file);
 			$this->add_mark($output_file, $output_file);

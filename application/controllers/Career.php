@@ -268,7 +268,10 @@ class Career extends CI_Controller {
 				'keterangan' => $row->keterangan,
 				'tandatanganhrga' => $row->tandatanganhrga,
 				'tandatangandirektur' => $row->tandatangandirektur,
-				'id_careerposts' => $row->id_careerposts
+				'id_careerposts' => $row->id_careerposts,
+				'infotambahan' => $row->posts,
+				'tipe_pekerjaan' => $row->tipe_pekerjaan,
+        		'lokasi' => $row->lokasi,
 		    );
 			$this->load->view('visitor/detail_career',$data);
 		}else{
@@ -276,7 +279,7 @@ class Career extends CI_Controller {
 		}
 	}
 
-	function job_detail($id)
+	function detail_job($id)
 	{
 		$row = $this->Career_model->get_by_id($id);
         if ($row) {
@@ -309,10 +312,14 @@ class Career extends CI_Controller {
 				'keterangan' => $row->keterangan,
 				'tandatanganhrga' => $row->tandatanganhrga,
 				'tandatangandirektur' => $row->tandatangandirektur,
-				'id_careerposts' => $row->id_careerposts
+				'id_careerposts' => $row->id_careerposts,
+				'infotambahan' => $row->posts,
+				'tipe_pekerjaan' => $row->tipe_pekerjaan,
+        		'lokasi' => $row->lokasi,
+        		'title' => 'Detail Lowongan Kerja'
 		    );
-		    $this->load->view('visitor/header');
-			$this->load->view('visitor/detail_career',$data);
+		    $this->load->view('visitor/header',$data);
+			$this->load->view('visitor/detail_career');
 			$this->load->view('visitor/footer');
 		}else{
 			echo "No Data";

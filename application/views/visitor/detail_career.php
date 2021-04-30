@@ -10,14 +10,14 @@
       <p><strong>Persyaratan Wajib :</strong></p>
       <ul>
         <li>Pendidikan min. <?php echo $id_tingkat_pendidikan." ".$id_jurusfakult; ?> </li>
-        <li><?php echo $batas_usia ?></li>
+        <li>Maksimal <?php echo $batas_usia ?> Tahun</li>
         <li>Pengalaman kerja <?php echo $pengalaman_kerja; ?></li>
         <li>Rajin, Tekun, Disiplin</li>
       </ul>
       <p><strong>Lingkup Pekerjaan/Tanggung Jawab :</strong></p>
-      <p> <?php echo $lptj ?></p>
+      <p><?php echo $lptj ?></p>
       <p><strong>Informasi Tambahan:</strong></p>
-      <p>$infotambahan</p>
+      <p><?php echo $infotambahan ?></p>
     </div>
     <div class="col-sm-4">
       <table class="table table-bordered">
@@ -27,11 +27,11 @@
         </tr>
         <tr>
           <td>Lokasi</td>
-          <td>: Bekasi</td>
+          <td>: <?php echo $lokasi; ?></td>
         </tr>
         <tr>
           <td>Tipe Pekerjaan</td>
-          <td>: Full Time</td>
+          <td>: <?php echo $tipe_pekerjaan; ?></td>
         </tr>
         <tr>
           <td>Gaji</td>

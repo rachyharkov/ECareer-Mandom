@@ -82,7 +82,7 @@
                   <?php
                     if ($this->fungsi->user_login()->id_dept == 2) {
                       ?>
-                      <li><a href="<?= base_url() ?>ecareer_posted">Kelola Lowongan</a></li>
+                      <li><a href="<?= base_url() ?>career_posts">Kelola Lowongan</a></li>
                       <?php
                     }
                   ?>

@@ -67,7 +67,7 @@ $newformat = date('Y-m-d',$time);
 $get = date('d-m-Y',strtotime("+2 weeks", strtotime($newformat)));
 echo $get;
 ?></td>
-          <td>Bekasi</td>
+          <td><?php echo $v->lokasi; ?></td>
         </tr>
         <?php } ?>
       </table>
