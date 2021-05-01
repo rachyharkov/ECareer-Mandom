@@ -107,7 +107,7 @@
                 </tr>
                 <tr>
                   <td>Photo 4x6</td>
-                  <td><input type="file" accept=".jpeg" required class="form-control-file" id="fu_foto" name="fu_foto"/></td>
+                  <td><input type="file" accept=".jpg" required class="form-control-file" id="fu_foto" name="fu_foto"/></td>
                 </tr>
                 <tr>
                   <td>Scan SKCK</td>

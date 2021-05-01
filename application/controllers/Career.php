@@ -52,7 +52,7 @@ class Career extends CI_Controller {
 		$config2['file_name']			= $this->input->post('tbnotelp',TRUE).'-'.date('dmYhm').'-DaftarRiwayatHidup';
 
 		$config3['upload_path']          = './lampiran/file_pelamar/';
-		$config3['allowed_types']        = '.jpg,.png';
+		$config3['allowed_types']        = 'jpg';
 		$config3['max_size']             = 2048;
 		$config3['file_name']			= $this->input->post('tbnotelp',TRUE).'-'.date('dmYhm').'-PasFoto';
 
@@ -141,7 +141,7 @@ class Career extends CI_Controller {
 			$this->filepasfoto->initialize($config3);
 			$this->filepasfoto->do_upload('fu_foto');			
      		$file3loc = 'lampiran/file_pelamar/';
-			$filename3 = $this->input->post('tbnotelp',TRUE).'-'.date('dmYhm').'-PasFoto.jpeg';
+			$filename3 = $this->input->post('tbnotelp',TRUE).'-'.date('dmYhm').'-PasFoto.jpg';
 		}
 
 		if(!empty($_FILES['fu_skck']['name'])) {

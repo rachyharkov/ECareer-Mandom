@@ -93,7 +93,6 @@ class Career_posts extends CI_Controller
 		'id_careerposts' => set_value('id_careerposts', $row->id_careerposts),
 		'posts' => set_value('posts', $row->posts),
 		'status' => set_value('status', $row->status),
-		'tgl_posts' => set_value('tgl_posts', $row->tgl_posts),
         'tipe_pekerjaan' => set_value('tipe_pekerjaan', $row->tipe_pekerjaan),
         'lokasi' => set_value('lokasi', $row->lokasi),
 	    );
@@ -115,7 +114,6 @@ class Career_posts extends CI_Controller
 		'id_careerposts' => $this->input->post('id_careerposts',TRUE),
 		'posts' => $this->input->post('posts',TRUE),
 		'status' => $this->input->post('status',TRUE),
-		'tgl_posts' => $this->input->post('tgl_posts',TRUE),
         'tipe_pekerjaan' => $this->input->post('tipe_pekerjaan'),
         'lokasi' => $this->input->post('lokasi'),
 	    );
@@ -144,8 +142,7 @@ class Career_posts extends CI_Controller
     {
 	$this->form_validation->set_rules('id_careerposts', 'id careerposts', 'trim|required');
 	$this->form_validation->set_rules('posts', 'posts', 'trim|required');
-	$this->form_validation->set_rules('status', 'status', 'trim|required');
-	$this->form_validation->set_rules('tgl_posts', 'tgl posts', 'trim|required');
+	$this->form_validation->set_rules('status', 'status', 'trim|required');	
     $this->form_validation->set_rules('tipe_pekerjaan', 'tipe pekerjaan', 'trim|required');
     $this->form_validation->set_rules('lokasi', 'lokasi', 'trim|required');
 

@@ -14,16 +14,12 @@
                                     <input type="text" class="form-control" name="id_careerposts" id="id_careerposts" placeholder="Id Careerposts" value="<?php echo $id_careerposts; ?>" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="varchar">Posts <?php echo form_error('posts') ?></label>
+                                    <label for="varchar">Catatan Tambahan <?php echo form_error('posts') ?></label>
                                     <input type="text" class="form-control" name="posts" id="posts" placeholder="Posts" value="<?php echo $posts; ?>" />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Status <?php echo form_error('status') ?></label>
                                     <input type="text" class="form-control" name="status" id="status" placeholder="Status" value="<?php echo $status; ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="timestamp">Tgl Posts <?php echo form_error('tgl_posts') ?></label>
-                                    <input type="text" class="form-control" name="tgl_posts" id="tgl_posts" placeholder="Tgl Posts" value="<?php echo $tgl_posts; ?>" />
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Tipe Pekerjaan <?php echo form_error('tipe_pekerjaan') ?></label>

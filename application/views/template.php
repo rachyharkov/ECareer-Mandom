@@ -83,6 +83,7 @@
                     if ($this->fungsi->user_login()->id_dept == 2) {
                       ?>
                       <li><a href="<?= base_url() ?>career_posts">Kelola Lowongan</a></li>
+                      <li><a href="<?= base_url() ?>data_pelamar">Data Pelamar</a></li>
                       <?php
                     }
                   ?>

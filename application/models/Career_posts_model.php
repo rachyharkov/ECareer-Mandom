@@ -17,12 +17,12 @@ class Career_posts_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('pengajuan_karyawan.*,career_posts.*');
+        $this->datatables->select('pengajuan_karyawan.*,career_posts.*,career_posts.id as id,tbl_posisi.*');
         $this->datatables->from('career_posts');
 
         //add this line for join
-        $this->datatables->join('pengajuan_karyawan', 'pengajuan_karyawan.id_careerposts = career_posts.id_careerposts');
-        $this->datatables->where('pengajuan_karyawan.status_pengajuan','Diterima');
+        $this->datatables->join('pengajuan_karyawan', 'pengajuan_karyawan.id_careerposts = career_posts.id_careerposts','left');
+        $this->datatables->join('tbl_posisi', 'tbl_posisi.id_posisi = pengajuan_karyawan.id_posisi','left');
         $this->datatables->add_column('action', anchor(site_url('career_posts/read/$1'),'Pratinjau')." | ".anchor(site_url('career_posts/update/$1'),'Update')." | ".anchor(site_url('career_posts/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }

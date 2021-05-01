@@ -90,8 +90,8 @@
                                     "data": "id",
                                     "orderable": false
                                 },{"data": "id_careerposts",render: function(data){
-                                    return '<a href="<?php echo base_url()?>Career/detail_job/' + data + '"> ' + data +' </a>';
-                                }},{"data": "id_posisi"},{"data": "status"},{"data": "tgl_posts"},
+                                    return '<a href="<?php echo base_url()?>Career/detail_job/' + data + '" target="_blank"> ' + data +' </a>';
+                                }},{"data": "nama_posisi"},{"data": "status"},{"data": "tgl_posts"},
                                 {
                                     "data" : "action",
                                     "orderable": false,

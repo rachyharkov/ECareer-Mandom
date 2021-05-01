@@ -55,21 +55,31 @@
             <th>LOCATION</th>
           </tr>
         </thead>
+        <tbody>
+          
+        
         <?php foreach ($info as $v) {
-        ?>
-        <tr id="careerid<?php echo $v->id ?>">
-          <td><?php $timeex = strtotime($v->tgl_posts);
+          $timeex = strtotime($v->tgl_posts);
           $newformatex = date('d-m-Y',$timeex);
-          echo $newformatex?></td>
-          <td><?php echo $v->nama_posisi; ?></td>
-          <td><?php $time = strtotime($v->tanggal_penempatan);
-$newformat = date('Y-m-d',$time);
-$get = date('d-m-Y',strtotime("+2 weeks", strtotime($newformat)));
-echo $get;
-?></td>
-          <td><?php echo $v->lokasi; ?></td>
-        </tr>
+
+          $time = strtotime($v->tanggal_penempatan);
+          $newformat = date('d-m-Y',$time);
+          
+          $get = date('d-m-Y',strtotime("+2 weeks", strtotime($newformatex)));
+
+          if (strtotime("today") <= strtotime($get)) {
+            ?>
+              <tr id="careerid<?php echo $v->id ?>">
+                <td><?php echo $newformatex?></td>
+                <td><?php echo $v->nama_posisi; ?></td>
+                <td><?php echo $get; ?></td>
+                <td><?php echo $v->lokasi; ?></td>
+              </tr>
+            <?php
+          }
+        ?>
         <?php } ?>
+        </tbody>
       </table>
     </div>
   </div>
