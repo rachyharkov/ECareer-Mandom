@@ -32,7 +32,6 @@
                         </div>
                     </div>
                     <div class="col-md-4 text-right">
-                        <?php echo anchor(site_url('career_posts/create'), 'Create', 'class="btn btn-primary"'); ?>
                 <?php echo anchor(site_url('career_posts/excel'), 'Excel', 'class="btn btn-primary"'); ?>
                 <?php echo anchor(site_url('career_posts/word'), 'Word', 'class="btn btn-primary"'); ?>
                 </div>

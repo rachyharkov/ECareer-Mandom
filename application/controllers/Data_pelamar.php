@@ -44,6 +44,8 @@ class Data_pelamar extends CI_Controller
 		'file_npwp' => $row->file_npwp,
 		'file_hasilkesehatan' => $row->file_hasilkesehatan,
 		'id_careerposts' => $row->id_careerposts,
+		'tanggal' => $row->tanggal_melamar,
+		'posisi' => $row->posisi_dilamar,
 	    );
 
             $this->template->load('template','data_pelamar/tbl_pelamar_read', $data);
@@ -286,6 +288,36 @@ class Data_pelamar extends CI_Controller
         );
         
         $this->load->view('data_pelamar/tbl_pelamar_doc',$data);
+    }
+
+    public function print_kelengkapanberkas() {
+    	$row = $this->Data_pelamar_model->get_by_id($this->input->post('tbidpelamar', TRUE));
+        if ($row) {
+            $data = array(
+				'id_pelamar' => $row->id_pelamar,
+				'nama_pelamar' => $row->nama_pelamar,
+				'no_telp' => $row->no_telp,
+				'email' => $row->email,
+				'file_suratlamaran' => $row->file_suratlamaran,
+				'file_daftarriwayathidup' => $row->file_daftarriwayathidup,
+				'file_photo' => $row->file_photo,
+				'file_skck' => $row->file_skck,
+				'file_ktp' => $row->file_ktp,
+				'file_aktekelahiran' => $row->file_aktekelahiran,
+				'file_kk' => $row->file_kk,
+				'file_ijazah' => $row->file_ijazah,
+				'file_transkripnilai' => $row->file_transkripnilai,
+				'file_npwp' => $row->file_npwp,
+				'file_hasilkesehatan' => $row->file_hasilkesehatan,
+				'id_careerposts' => $row->id_careerposts,
+				'tanggal' => $row->tanggal_melamar,
+				'posisi' => $row->posisi_dilamar,
+		    );
+    		$this->load->view('data_pelamar/print_datapelamar',$data);	
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('pengajuan_karyawan'));
+        }	
     }
 
 }

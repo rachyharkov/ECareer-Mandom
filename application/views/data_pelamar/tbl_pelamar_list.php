@@ -32,7 +32,6 @@
                 </div>
             </div>
             <div class="col-md-4 text-right">
-                <?php echo anchor(site_url('data_pelamar/create'), 'Create', 'class="btn btn-primary"'); ?>
         <?php echo anchor(site_url('data_pelamar/excel'), 'Excel', 'class="btn btn-primary"'); ?>
         <?php echo anchor(site_url('data_pelamar/word'), 'Word', 'class="btn btn-primary"'); ?>
         </div>
@@ -44,6 +43,8 @@
             <th>Nama Pelamar</th>
             <th>No Telp</th>
             <th>Email</th>
+            <th>Posisi</th>
+            <th>Tanggal</th>
             <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -88,7 +89,7 @@
                         {
                             "data": "id_pelamar",
                             "orderable": false
-                        },{"data": "nama_pelamar"},{"data": "no_telp"},{"data": "email"},
+                        },{"data": "nama_pelamar"},{"data": "no_telp"},{"data": "email"},{"data": "posisi_dilamar"},{"data": "tanggal_melamar"},
                         {
                             "data" : "action",
                             "orderable": false,

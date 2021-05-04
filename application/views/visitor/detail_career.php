@@ -144,6 +144,7 @@
               </table>
             </div>
           </div>
+          <input type="hidden" name="tbposisidilamar" id="tbposisidilamar" value="<?php echo $id_posisi ?>">
         </div>
       </div>
       <div class="modal-footer">

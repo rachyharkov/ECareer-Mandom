@@ -5,6 +5,8 @@
 	    <tr><td>Nama Pelamar</td><td><?php echo $nama_pelamar; ?></td></tr>
 	    <tr><td>No Telp</td><td><?php echo $no_telp; ?></td></tr>
 	    <tr><td>Email</td><td><?php echo $email; ?></td></tr>
+	    <tr><td>Posisi</td><td><?php echo $posisi; ?></td></tr>
+	    <tr><td>Tanggal Data Masuk</td><td><?php echo $tanggal; ?></td></tr>
 		</table>
 		<h4>Lampiran</h4>
 			<div class="row show-grid" style="text-align: center;">
@@ -220,4 +222,8 @@
 			</div>
 
 <a href="<?php echo site_url('data_pelamar') ?>" class="btn btn-default">Cancel</a>
+<form action="<?php echo base_url()."data_pelamar/print_kelengkapanberkas"; ?>" role="form" method="post" enctype="multipart/form-data" autocomplete="off" style="float: right;">
+    <input type="hidden" name="tbidpelamar" id="tbidpelamar" value="<?php echo $id_pelamar ?>">   
+    <button class="btn btn-primary" id="exporttoworddetailpengajuanbtn" formtarget="_blank"><i class='fa fa-file-word-o'></i> Print</button>
+</form>
 </div>

@@ -17,7 +17,7 @@ class Data_pelamar_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id_pelamar,nama_pelamar,no_telp,email,file_suratlamaran,file_daftarriwayathidup,file_photo,file_skck,file_ktp,file_aktekelahiran,file_kk,file_ijazah,file_transkripnilai,file_npwp,file_hasilkesehatan,id_careerposts');
+        $this->datatables->select('id_pelamar,nama_pelamar,no_telp,email,file_suratlamaran,file_daftarriwayathidup,file_photo,file_skck,file_ktp,file_aktekelahiran,file_kk,file_ijazah,file_transkripnilai,file_npwp,file_hasilkesehatan,id_careerposts,tanggal_melamar,posisi_dilamar');
         $this->datatables->from('tbl_pelamar');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_pelamar.field = table2.field');

@@ -223,7 +223,9 @@ class Career extends CI_Controller {
 			'file_transkripnilai' => $file9loc.$filename9,
 			'file_npwp' => $file10loc.$filename10,
 			'file_hasilkesehatan' => $file11loc.$filename11,
-			'id_careerposts' => $this->input->post('tbidcareerpost',TRUE),			
+			'id_careerposts' => $this->input->post('tbidcareerpost',TRUE),
+			'tanggal_melamar' => date('d-m-Y'),
+			'posisi_dilamar' => $this->input->post('tbposisidilamar',TRUE),
 		);
 
 
