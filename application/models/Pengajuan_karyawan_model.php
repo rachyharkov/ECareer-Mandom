@@ -44,17 +44,17 @@ class Pengajuan_karyawan_model extends CI_Model
     }
 
     // get data by id
-    function get_by_id($id)
+    function get_by_id($idnya)
     {
         $this->db->select('pengajuan_karyawan.*,tbl_dept.*,tbl_fakultas.*,tbl_posisi.*,tbl_priority.*,tbl_tingkat_pendidikan.*,status_karyawan.*')
-        ->from('pengajuan_karyawan')
+            ->from('pengajuan_karyawan')
             ->join('tbl_dept','tbl_dept.id_dept = pengajuan_karyawan.id_dept')
             ->join('tbl_fakultas','tbl_fakultas.id_fakultas = pengajuan_karyawan.id_jurusfakult')
             ->join('tbl_posisi','tbl_posisi.id_posisi = pengajuan_karyawan.id_posisi')
             ->join('tbl_priority','tbl_priority.id_priority = pengajuan_karyawan.priority_id')
             ->join('tbl_tingkat_pendidikan','tbl_tingkat_pendidikan.id_tingkat_pendidikan = pengajuan_karyawan.id_tingkat_pendidikan')
             ->join('status_karyawan','status_karyawan.status_karyawan_id = pengajuan_karyawan.id_sk');
-        $this->db->where('pengajuan_karyawan.id_form', $id);
+        $this->db->where('pengajuan_karyawan.id_form', $idnya);
         $query = $this->db->get();
         return $query->row();
     }
